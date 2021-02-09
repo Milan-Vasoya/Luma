@@ -1,0 +1,25 @@
+.navbarContainer {
+    height          : 45px;
+    background-color: #f0f0f0;
+
+    .navbar {
+        width     : 80%;
+        height    : 100%;
+       
+        margin    : auto;
+        display: flex;
+
+        .navbar__TextContainer {
+            display        : flex;
+            justify-content: space-between;
+            width: 60%;
+            align-items: center;
+            
+
+            >span{
+                cursor: pointer;
+            }
+        }
+
+    }
+}

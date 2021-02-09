@@ -1,0 +1,82 @@
+.dropdown {
+    position: relative;
+    height  : 100%;
+    ;
+
+    .navItem {
+        height     : 100%;
+        padding-top: 10PX;
+
+        .dropdownPanel {
+            display         : none;
+            position        : absolute;
+            width           : auto;
+            height          : auto;
+            box-shadow      : -6px 5px 16px 0 rgba(0, 0, 0, 0.2);
+            list-style-type : none;
+            padding-left    : unset;
+            margin-top      : 10px;
+            z-index         : 1;
+            background-color: #f9f9f9;
+
+            .dropDownItems {
+
+                width  : 11rem;
+                height : 35px;
+                padding: 5px 15px;
+
+                .subItemsContainer {
+                    display: flex;
+
+                    .dropDown__subItems {
+
+                        position  : absolute;
+                        box-shadow: 6px 6px 16px 0px rgba(0, 0, 0, 0.2);
+                        // top       : 0;
+                        right     : -178px;
+                        z-index   : 2;
+                        padding   : unset;
+                        margin: -6px 0px;
+
+                        .dropDown__subItemsList {
+                            display        : none;
+                            list-style-type: none;
+                            width          : 11rem;
+                            height         : auto;
+                            padding        : 5px 15px;
+
+                            &:hover {
+                                background-color: #e8e8e8;
+                            }
+                        }
+                    }
+
+                }
+
+
+
+
+                &:hover {
+                    background-color: #e8e8e8;
+                    display         : block;
+
+                    .dropDown__subItems {
+                        .dropDown__subItemsList {
+                            display: block;
+                        }
+                    }
+                }
+
+
+            }
+        }
+
+        &:hover {
+            .dropdownPanel {
+                display: block;
+            }
+        }
+    }
+
+
+}

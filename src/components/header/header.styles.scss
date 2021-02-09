@@ -1,0 +1,65 @@
+$off-white:#f0f0f0;
+$grey     :#6e716e;
+
+.header {
+  
+    height          : 140px;
+    width           : 100%;
+
+
+    .header__panel {
+        height    : 50px;
+        background: $grey;
+    }
+
+    .header__wrapper {
+        width          : 80%;
+        height         : 90px;
+        margin         : auto;
+        display        : flex;
+        justify-content: space-between;
+
+        .logoContainer {
+            display        : flex;
+            height         : 100%;
+            align-items    : center;
+            justify-content: center;
+        }
+
+        .serchbarContainer {
+            display    : flex;
+            height     : 100%;
+            align-items: center;
+
+
+
+            .serchBar {
+                font-size    : 16px;
+                height       : 24px;
+                border       : 1px solid grey;
+                margin-left  : 13px;
+                padding      : 15px 25px;
+                border-radius: 3px;
+            }
+
+            .btn {
+                border     : none;
+                opacity    : .2;
+                color      : #6e716e;
+                cursor     : pointer;
+                margin-left: -2.5rem;
+
+                .seachIcon {
+                    
+                    height: 18px;
+                    margin: 2px 0 -1px 0;
+                }
+            }
+
+
+        }
+
+
+    }
+
+}
