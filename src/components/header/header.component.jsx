@@ -19,7 +19,9 @@ const Header = () => (
 
       </div>
     </div>
-    <Navbar />
+ <div className='navbar' >
+      <Navbar />
+ </div>
   </div>
 );
 export default Header;
