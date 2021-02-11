@@ -1,0 +1,18 @@
+.master-Container{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+
+    .sub-Container{
+        width: 80%;
+         display: flex;
+         .sideContainer{
+             width: 25%;
+            
+         }
+         .mainContainer{
+             width: 75%;
+             
+         }
+    }
+}

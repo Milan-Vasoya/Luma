@@ -2,14 +2,34 @@ $off-white:#f0f0f0;
 $grey     :#6e716e;
 
 .header {
+
   
-    height          : 186px;
-    width           : 100%;
+    width : 100%;
 
 
     .header__panel {
-        height    : 50px;
-        background: $grey;
+        height         : 50px;
+        background     : $grey;
+        display        : flex;
+        justify-content: center;
+        color: white;
+
+        .header_panel_container {
+            width: 80%;
+
+            position: relative;
+
+            .header__signinLink {
+                position: absolute;
+                right   : 5px;
+
+
+                .link__signin {
+                    text-decoration: none;
+                    color          : white;
+                }
+            }
+        }
     }
 
     .header__wrapper {
@@ -50,7 +70,7 @@ $grey     :#6e716e;
                 margin-left: -2.5rem;
 
                 .seachIcon {
-                    
+
                     height: 18px;
                     margin: 2px 0 -1px 0;
                 }

@@ -6,22 +6,34 @@ import Navbar from "../navbar/navbar.component";
 
 const Header = () => (
   <div className="header">
-    <div className="header__panel"></div>
+    <div className="header__panel">
+      <div className='header_panel_container'>
+        <span className="header__signinLink">
+          <a href="/" className="link__signin">
+            Sign In  
+          </a>
+          <span> or </span> 
+          <a href="/" className="link__signin">
+             Create Account 
+          </a>
+        </span>
+      </div>
+    </div>
 
     <div className="header__wrapper">
       <div className="logoContainer">
         <LumaLogo />
       </div>
-      <div className='serchbarContainer'>
-   
-     <input type='text' placeholder='Search Products' className='serchBar' />
-     <button className="btn"><SearchLogo className='seachIcon' /></button>
-
+      <div className="serchbarContainer">
+        <input type="text" placeholder="Search Products" className="serchBar" />
+        <button className="btn">
+          <SearchLogo className="seachIcon" />
+        </button>
       </div>
     </div>
- <div className='navbar' >
+    <div className="navbar">
       <Navbar />
- </div>
+    </div>
   </div>
 );
 export default Header;
