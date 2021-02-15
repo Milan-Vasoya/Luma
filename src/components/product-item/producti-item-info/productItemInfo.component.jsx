@@ -5,6 +5,8 @@ const sizes = ["XS", "S", "M", "L"];
 const colors = ["red", "blue", "yellow", "green"];
 
 const ProductItemInfo = ({ product: { images, price_info, name } }) => (
+
+  
   <div className="product-item-info">
     <div className="product-item-image">
       <img src={`${images[0].url}`} alt="img" />
@@ -39,15 +41,19 @@ const ProductItemInfo = ({ product: { images, price_info, name } }) => (
           ></div>
         ))}
       </div>
-      <div className="product-item-add">
-        <button className="product-item-btn">Add To Cart</button>
-        <div className="product-item-icon">
-          <span className="product-item-icon__icon">
-            <i class="fa fa-heart"></i>
-          </span>
-          <span className="product-item-icon__icon">
-            <i class="fa fa-exchange"></i>
-          </span>
+      <div className='product-item-add-container'>
+        <div className="product-item-add">
+          <div className='hover-toggle'>
+          <button className="product-item-btn">Add To Cart</button>
+          <div className="product-item-icon">
+            <span className="product-item-icon__icon">
+              <i className="fa fa-heart"></i>
+            </span>
+            <span className="product-item-icon__icon">
+              <i className="fa fa-exchange"></i>
+            </span>
+          </div>
+          </div>
         </div>
       </div>
     </div>

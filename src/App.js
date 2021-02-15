@@ -6,17 +6,36 @@ import Header from "./components/header/header.component";
 // import Demo from "./components/trash/demo.component";
 import ProductItem from "./components/product-item/productItem.component";
 import MasterContainer from "./components/masterContainer/master.container";
-
+//import Sidebar from "./components/sidebar/sidebar.components";
+import { Route, Switch } from "react-router-dom";
+import SignInSignUpPage from "./Pages/SignIn and Signup page/signIn-SignUp.page";
 import "./core.styles.scss";
+import PageNoteFound from "./components/trash/PageNoteFound.component";
+// import Image from "./components/ImageSlideShow/imageSlideshow.componenet";
+// import ProductDisplay from "./components/Product-display-container/Product-display-cotainer.component";
 
 const App = () => {
   return (
     <div>
       <Header />
- 
-      <MasterContainer>
-      <ProductItem />
-      </MasterContainer>
+     
+      <Switch>
+        
+      
+      <Route
+          path="/"
+          exact={true}
+          render={() => (
+            <MasterContainer>
+              <ProductItem />
+            </MasterContainer>
+          )}
+        
+        /> 
+        <Route path="/signIn" component={SignInSignUpPage} />
+        <Route component={PageNoteFound} />
+      </Switch>
+     
     </div>
   );
 };

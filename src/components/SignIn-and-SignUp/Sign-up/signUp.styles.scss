@@ -1,0 +1,16 @@
+.sign-up {
+    display: flex;
+    flex-direction: column;
+    width: 420px;
+    margin: 20px 0 20px 10px;
+    @media (max-width:800px) {
+      @media (max-width:800px) {
+    
+        width: auto;
+       }
+    }
+    .title {
+      margin: 10px 0;
+    }
+  }
+  

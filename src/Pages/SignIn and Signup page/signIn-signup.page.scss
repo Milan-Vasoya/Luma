@@ -1,0 +1,11 @@
+.SignIn-SignUp-container{
+    display: flex;
+    justify-content: center;
+
+    .signIn-signUp{
+        width: 90%;
+        margin-top: 3rem;
+        display: flex;
+        justify-content: space-evenly;
+    }
+}
