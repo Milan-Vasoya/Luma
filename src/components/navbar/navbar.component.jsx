@@ -22,7 +22,7 @@ const navbarItems = [
     navItem: [
       {
         mainItem: "Tops",
-        subItems: ["Jackets", "Hoodies & Sweatshirts", "Tees", "Bars & Tanks"],
+        subItems: ["Jackets", "Hoodies & Sweatshirts", "Tees", "Tanks"],
       },
       {
         mainItem: "Bottoms",

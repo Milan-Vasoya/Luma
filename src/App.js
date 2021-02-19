@@ -12,19 +12,19 @@ import SignInSignUpPage from "./Pages/SignIn and Signup page/signIn-SignUp.page"
 import "./core.styles.scss";
 import PageNoteFound from "./components/trash/PageNoteFound.component";
 // import Image from "./components/ImageSlideShow/imageSlideshow.componenet";
-// import ProductDisplay from "./components/Product-display-container/Product-display-cotainer.component";
-import ProductTab from './components/product-tab/product-tab.components'
-
+import ProductDisplay from "./components/Product-display-container/Product-display-cotainer.component";
+import ProductTab from "./components/product-tab/product-tab.components";
+// import data from "./attributes/Colors/Colors.attributes";
 
 const App = () => {
   return (
     <div>
       <Header />
-     
+
       <Switch>
-        <Route path='/prod' component={ProductTab} />
-      
-      <Route
+        <Route path="/prod" component={ProductTab} />
+
+        <Route
           path="/"
           exact={true}
           render={() => (
@@ -32,13 +32,12 @@ const App = () => {
               <ProductItem />
             </MasterContainer>
           )}
-        
-        /> 
+        />
+      <Route path="/prodDisplay" component={ProductDisplay} />
         
         <Route path="/signIn" component={SignInSignUpPage} />
         <Route component={PageNoteFound} />
       </Switch>
-     
     </div>
   );
 };
