@@ -1,0 +1,133 @@
+.prod-tab-contaier {
+    display       : flex;
+    align-items   : center;
+    flex-direction: column;
+
+    .prod-tab-sub-container {
+        width: 80%;
+    }
+}
+
+.prod-tab-switch {
+    display: flex;
+    height : 51px;
+
+    .prod-switches {
+        padding            : 12px 20px;
+        background-color   : #f6f6f6;
+        border             : 1px solid gray;
+        border-bottom-style: none;
+        letter-spacing     : 0.8px;
+    }
+
+    .prod-tab-switch-1 {
+        @extend .prod-switches;
+        border-right-style: none;
+    }
+
+    .prod-tab-switch-2 {
+        @extend .prod-switches;
+
+    }
+
+    .prod-tab-switch-3 {
+        @extend .prod-switches;
+        border-left-style: none;
+
+    }
+
+    .chage-height {
+        height: 52px;
+        background-color: white;
+    }
+    
+
+}
+
+
+
+
+
+
+.prod-tab {
+
+    font-size: 15px;
+    border   : 1px solid grey;
+    padding  : 30px;
+    color    : rgb(51, 51, 51);
+
+
+    .prod-tab-1 {
+        display: block;
+
+        >ul {
+            padding-left: 15px;
+        }
+    }
+
+    .prod-tab-2 {
+
+
+        th {
+            display: flex;
+            padding: 5px 30px 10px 0;
+        }
+
+    }
+
+    .prod-tab-3 {
+
+
+        .prod-review-title {
+            line-height: 1.1;
+            font-size  : 26px;
+        }
+
+        .prod-review-body {
+            border-bottom: 1px solid #c9c9c9;
+
+
+            .prod-review-item {
+                padding: 25px 0 30px 0;
+
+                .review-title {
+
+                    font-size  : 21px;
+                    font-weight: 600;
+                }
+
+
+            }
+
+            .prod-item-body {
+                display      : flex;
+                margin-bottom: 30px;
+
+                .prod-item-rating {
+                    display: flex;
+                    flex   : 1;
+
+                    .prod-rating-text {
+                        padding-right: 25px;
+                        font-size    : 15px;
+                    }
+
+                    .prod-item-star {
+                        width: 70px;
+                    }
+
+                }
+
+                .prod-item-summary {
+                    flex: 3;
+
+                    .prod-item-description {
+                        margin-bottom: 20px;
+                    }
+
+
+                }
+            }
+        }
+    }
+}

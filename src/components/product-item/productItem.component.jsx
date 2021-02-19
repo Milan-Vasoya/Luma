@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductItemInfo from "./producti-item-info/productItemInfo.component";
 import "./productItem.styles.scss";
-import axios from "axios";
-import MasterContainer from "../masterContainer/master.container";
 
 const ProductItem = () => {
   //   const [products]= useState([
@@ -56,6 +54,24 @@ const ProductItem = () => {
       .then((res) => res.json())
       .then((data) => setProducts(data.items));
   }, []);
+
+  // useEffect(() => {
+  //   fetch(
+  //     "https://m241full.digitsoftsol.co/index.php/rest/all/V1/integration/admin/token",
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         username: "admin",
+  //         password: "admin@123",
+  //       }),
+  //     }
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => console.log(data));
+  // }, []);
 
   return (
     <div className="product-item">

@@ -13,6 +13,8 @@ import "./core.styles.scss";
 import PageNoteFound from "./components/trash/PageNoteFound.component";
 // import Image from "./components/ImageSlideShow/imageSlideshow.componenet";
 // import ProductDisplay from "./components/Product-display-container/Product-display-cotainer.component";
+import ProductTab from './components/product-tab/product-tab.components'
+
 
 const App = () => {
   return (
@@ -20,7 +22,7 @@ const App = () => {
       <Header />
      
       <Switch>
-        
+        <Route path='/prod' component={ProductTab} />
       
       <Route
           path="/"
@@ -32,6 +34,7 @@ const App = () => {
           )}
         
         /> 
+        
         <Route path="/signIn" component={SignInSignUpPage} />
         <Route component={PageNoteFound} />
       </Switch>
