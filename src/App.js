@@ -15,6 +15,7 @@ import PageNoteFound from "./components/trash/PageNoteFound.component";
 import ProductDisplay from "./components/Product-display-container/Product-display-cotainer.component";
 import ProductTab from "./components/product-tab/product-tab.components";
 // import data from "./attributes/Colors/Colors.attributes";
+import CatPage from "./Pages/catPage/catPage.component";
 
 const App = () => {
   return (
@@ -34,6 +35,8 @@ const App = () => {
           )}
         />
       <Route path="/prodDisplay" component={ProductDisplay} />
+      <Route path="/catPage" component={CatPage} />
+        
         
         <Route path="/signIn" component={SignInSignUpPage} />
         <Route component={PageNoteFound} />

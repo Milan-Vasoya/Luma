@@ -1,40 +1,24 @@
 import React from "react";
-import "./demo.styles.scss";
+import { Link, useParams, Route } from "react-router-dom";
+import { connect, useSelector } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectIdFromAttr } from "../../redux/PageReducer/categoryPage.selector";
+import MasterContainer from "../masterContainer/master.container";
+import ProductItem from "../product-item/productItem.component";
+const PageNotFound = () => {
+  const params = useParams();
 
-class Demo extends React.Component {
-  state = {
-    data: {},
-  };
-  componentDidMount() {
-    fetch(
-      "https://m241full.digitsoftsol.co/index.php/rest/all/V1/products-render-info?searchCriteria%5BpageSize%5D=10&storeId=1&currencyCode=usd"
-    )
-      .then((res) => res.json())
-      .then((data) => this.setState({ data }));
-  }
-  //   item.price_info.final_price  item.images[0].url
-  render() {
-    const data = this.state.data.items;
+  const pageId = useSelector((state) => selectIdFromAttr(state, params.catId));
+  console.log("[subCat]", pageId);
 
-    return (
-      <div className="product-item">
-        {data
-          ? data.map((item) => (
-              <div className="product-item-info" key={item.id}>
-                <div className="product-image">
-                  <img src={`${item.images[0].url}`}  alt='img'/>
-                </div>
-                <div className="product-info">
-                  <span>{item.name}</span>
+  return (
+    <MasterContainer>
+      <ProductItem pageId={pageId} />
+    </MasterContainer>
+  );
+};
 
-                  <span>Price:{item.price_info.final_price}</span>
-                </div>
-              </div>
-            ))
-          : null}
-      </div>
-    );
-  }
-}
-
-export default Demo;
+// const mapStateToProps = createStructuredSelector({
+//   pageId :(state, abc)=>selectCatId(state,abc)
+// });
+export default PageNotFound;

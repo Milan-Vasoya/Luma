@@ -1,11 +1,18 @@
 import React from "react";
 import "./navbarDropdown.styles.scss";
 import DropDownPanel from "../DropdownPanel/dropdownPanel.component";
+import { NavLink } from 'react-router-dom';
 
-const NavbarDropdown = ({ navItems }) => (
+
+
+
+const NavbarDropdown = ({ navItems }) =>
+{
+
+  return (
   <div className="dropdown">
     <div className="navItem">
-      <span>{navItems.section}</span>
+      <NavLink activeClassName='drop-down-navlink' to={`${navItems.sectionLink}`} >{navItems.section}</NavLink>
 
       <ul className="dropdownPanel">
         {navItems.navItem
@@ -17,4 +24,5 @@ const NavbarDropdown = ({ navItems }) => (
     </div>
   </div>
 );
+}
 export default NavbarDropdown;

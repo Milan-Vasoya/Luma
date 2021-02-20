@@ -15,11 +15,21 @@ const ProductItemInfo = ({ sku }) => {
   const [product, setProduct] = useState({});
   useEffect(() => {
     fetchProducts(
-      `https://m241full.digitsoftsol.co/index.php/rest/V1/products/${sku}?fields=id,name,price,media_gallery_entries,extension_attributes[configurable_product_options]`
+      `https://m241full.digitsoftsol.co/index.php/rest/V1/products/${sku}?fields=id,name,type_id,price,media_gallery_entries,extension_attributes[configurable_product_options]`
     ).then((data) => setProduct(data));
+  
+    return ()=>{
+      sizes = null;
+      colors = null;
+      setProduct(null);
+    }
   }, [sku]);
 
-  if (product.id) {
+  // if(product.type_id==='configurable'){
+  //   console.log(product.extension_attributes)
+  // }
+
+  if (product.type_id==='configurable') {
     const attributes =
       product.extension_attributes.configurable_product_options;
     attributes.forEach((item) => {
@@ -34,7 +44,7 @@ const ProductItemInfo = ({ sku }) => {
   return (
     <div className="product-item-info">
       <div className="product-item-image">
-        {product.id ? (
+        {(product.id) ? (
           <img
             src={`${ImagePath}${product.media_gallery_entries[0].file}`}
             alt="img"
@@ -43,12 +53,12 @@ const ProductItemInfo = ({ sku }) => {
       </div>
       <div className="product-item-info-container">
         <div className="product-item-name">
-          <span className="product-item-name__text">{product.name}</span>
+          <span className="product-item-name__text">{product?product.name:null}</span>
         </div>
 
         <div className="product-item-price">
           <span className="product-item-name__text">
-            Price: <b>{product.price}</b>
+            Price: <b>{product?product.price:null}</b>
           </span>
         </div>
 
