@@ -1,11 +1,33 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./product-tab.styles.scss";
+import HtmlParser from "html-react-parser";
+import materialAttributes from "../../attributes/materials/materials.attributes";
+import { generatePath } from "react-router";
 
-const ProductTab = () => {
+let description = "";
+
+let materials = null;
+const ProductTab = ({ customAttributes }) => {
   const [tab, setTab] = useState(1);
 
+  
+    
+  if (customAttributes) {
+    customAttributes.forEach((item) => {
+      switch (item.attribute_code) {
+        case "description": {
+          return (description = item.value);
+        }
+        case "material":        
+         const abc= item.value.split(',');
+        return materials= abc.map((item)=>materialAttributes[item])
 
+      }
+    });
+  }
 
+  const GenralStyle= description.split('&bull;');
+  //console.log("des", GenralStyle );
   return (
     <div className="prod-tab-contaier">
       <div className="prod-tab-sub-container">
@@ -28,28 +50,13 @@ const ProductTab = () => {
             className={`prod-tab-switch-3 ${tab === 3 ? `chage-height` : null}`}
             onClick={() => setTab(3)}
           >
-            <span>Details</span>
+            <span>Review</span>
           </div>
         </div>
 
         <div className="prod-tab">
           {tab === 1 ? (
-            <div className="prod-tab-1">
-              <p>
-                The Ingrid Running Jacket combines sleek design and high
-                performance with slim, contoured fit and moisture-wicking
-                fabric. It features a full-zip construction and a collared neck
-                to keep the elements out and body heat in.
-              </p>
-              <ul>
-                <li> Slim fit.</li>
-                <li>Moisture-wicking fabric.</li>
-                <li>Two side pockets.</li>
-                <li>Zippered pocket at back waist.</li>
-                <li> Machine wash/dry.</li>
-                <li>Ivory specked full zip</li>
-              </ul>
-            </div>
+            <div className="prod-tab-1">{HtmlParser(description)}</div>
           ) : null}
 
           {tab === 2 ? (
@@ -58,12 +65,19 @@ const ProductTab = () => {
                 <tbody>
                   <tr>
                     <th> Style </th>
-                    <td>Jacket, Lightweight, Full Zip </td>
+                    <td>{
+                     HtmlParser (GenralStyle[1].replace('.<br />','')+','+GenralStyle[2])
+                    }</td>
                   </tr>
 
                   <tr>
                     <th>Material </th>
-                    <td> Nylon, Polyester, CoolTech™</td>
+                    <td> 
+                    
+                   {
+                   HtmlParser( materials.join(','))
+                   }
+                    </td>
                   </tr>
 
                   <tr>

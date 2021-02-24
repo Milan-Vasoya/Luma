@@ -1,0 +1,17 @@
+.product-item-sizes {
+    display    : flex;
+    flex-wrap  : wrap;
+    font-weight: 700;
+    margin     : 5px 0;
+
+}
+
+.product-item-color{
+    @extend .product-item-sizes;
+}
+
+.product-variation-label {
+    font-size  : 13px;
+    font-weight: 700;
+    margin: 10px 0;
+}

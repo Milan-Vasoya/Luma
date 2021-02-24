@@ -1,50 +1,50 @@
 import React, { useEffect, useState } from "react";
 import "./productItemInfo.styles.scss";
 import fetchProducts from "../../fetchProducts/fetchProducts";
-import ColorAttributes from "../../../attributes/Colors/Colors.attributes";
-import SizeAttributes from "../../../attributes/Sizes/Sizes.attributes";
-import ProductColor from "../../productColors/productColor.component";
-import ProductSize from "../../productSizes/productSizes.component";
+// import ColorAttributes from "../../../attributes/Colors/Colors.attributes";
+// import SizeAttributes from "../../../attributes/Sizes/Sizes.attributes";
+// import ProductColor from "../../productColors/productColor.component";
+// import ProductSize from "../../configurableProduct/productSizes/productSizes.component";
+import ConfigurableProduct from "../../configurableProduct/configurable.product";
 
-let sizes = null;
-let colors = null;
+// let sizes = null;
+// let colors = null;
 const ImagePath = "https://m241full.digitsoftsol.co/pub/media/catalog/product";
 
 const ProductItemInfo = ({ sku }) => {
-
   const [product, setProduct] = useState({});
   useEffect(() => {
     fetchProducts(
       `https://m241full.digitsoftsol.co/index.php/rest/V1/products/${sku}?fields=id,name,type_id,price,media_gallery_entries,extension_attributes[configurable_product_options]`
     ).then((data) => setProduct(data));
-  
-    return ()=>{
-      sizes = null;
-      colors = null;
+
+    return () => {
+      // sizes = null;
+      // colors = null;
       setProduct(null);
-    }
+    };
   }, [sku]);
 
   // if(product.type_id==='configurable'){
   //   console.log(product.extension_attributes)
   // }
+  let configOptions = null;
 
-  if (product.type_id==='configurable') {
-    const attributes =
-      product.extension_attributes.configurable_product_options;
-    attributes.forEach((item) => {
-      if (item.label === "Color") {
-        colors = ColorAttributes(item.values);
-      } else {
-        sizes = SizeAttributes(item.values);
-      }
-    });
+  if (product.type_id === "configurable") {
+    configOptions = product.extension_attributes.configurable_product_options;
+    // attributes.forEach((item) => {
+    //   if (item.label === "Color") {
+    //     colors = ColorAttributes(item.values);
+    //   } else {
+    //     sizes = SizeAttributes(item.values);
+    //   }
+    // });
   }
 
   return (
     <div className="product-item-info">
       <div className="product-item-image">
-        {(product.id) ? (
+        {product.id ? (
           <img
             src={`${ImagePath}${product.media_gallery_entries[0].file}`}
             alt="img"
@@ -53,30 +53,25 @@ const ProductItemInfo = ({ sku }) => {
       </div>
       <div className="product-item-info-container">
         <div className="product-item-name">
-          <span className="product-item-name__text">{product?product.name:null}</span>
+          <span className="product-item-name__text">
+            {product ? product.name : null}
+          </span>
         </div>
 
         <div className="product-item-price">
           <span className="product-item-name__text">
-            Price: <b>{product?product.price:null}</b>
+            Price: <b>{product ? product.price : null}</b>
           </span>
         </div>
 
-        <div className="product-item-sizes">
-          {sizes
-            ? sizes.map((size, index) => (
-                <ProductSize key={index} size={size} />
-              ))
-            : null}
-        </div>
+        {
+          // Colors and sizes
 
-        <div className="product-item-color">
-          {colors
-            ? colors.map((color, index) => (
-                <ProductColor key={index} color={color} />
-              ))
-            : null}
-        </div>
+          configOptions ? (
+            <ConfigurableProduct configOptions={configOptions} />
+          ) : null
+        }
+
         <div className="product-item-add-container">
           <div className="product-item-add">
             <div className="hover-toggle">

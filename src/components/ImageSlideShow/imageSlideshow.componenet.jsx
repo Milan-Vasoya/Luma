@@ -2,15 +2,10 @@ import React, { useState } from "react";
 import "./imageSlideShow.styles.scss";
 import ImageLoader from "./image-loader/image-loader.component";
 
-const ImageSlideShow = () => {
+const ImagePath = "https://m241full.digitsoftsol.co/pub/media/catalog/product";
+
+const ImageSlideShow = ({images}) => {
   const [count, setCount] = useState(0);
-  const images = [
-    "https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI",
-    "https://i.picsum.photos/id/380/200/300.jpg?grayscale&hmac=GJWYvpHCRRldAJjla1i5ljlrmqB0X10iTISyPqHtQNA",
-    "https://i.picsum.photos/id/351/200/300.jpg?hmac=OSQYmRI8IZkaMcC4ERotpBhe0AymVYajIIKPJFDzGBY",
-    "https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
-    "https://i.picsum.photos/id/81/200/300.webp?hmac=GKOApmmdTie6EGVfZ0OeZAt-iHOMeNCPxc1LUn-hTJE",
-  ];
 
   const setCountDefault = (countToSet) => {
     const arrayLenth = images.length-1;
@@ -23,6 +18,7 @@ const ImageSlideShow = () => {
     }
   };
  
+  // console.log('images',images)
 
   return (
     <div >
@@ -36,7 +32,7 @@ const ImageSlideShow = () => {
         </span>
         <img
           className="slider-container-images"
-          src={`${images[count]}`}
+          src={`${ImagePath}/${images[count]}`}
           alt="img"
         />
         <span
@@ -56,4 +52,4 @@ const ImageSlideShow = () => {
   );
 };
 
-export default ImageSlideShow;
+export default  ImageSlideShow;

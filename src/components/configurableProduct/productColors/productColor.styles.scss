@@ -1,0 +1,10 @@
+.color-box {
+    margin: 0 7px 0 0;
+    width : 52px;
+    height: 34px;
+    cursor: pointer;
+
+    &:hover{
+        border: 1px solid black;
+    }
+}

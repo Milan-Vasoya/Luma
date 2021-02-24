@@ -1,10 +1,10 @@
 import React from "react";
 import { useRouteMatch,Route } from 'react-router-dom';
-import demoComponent from "../../components/trash/demo.component";
+import CategoriesWisePage from "../../components/PageCategories/PageCategories.component";
 const CatPage = () => {
 const match =useRouteMatch();
   return <div> 
-  <Route path={`${match.url}/:catId`} component={demoComponent} />
+  <Route path={`${match.url}/:catId`} component={CategoriesWisePage} />
   </div>;
 };
 
