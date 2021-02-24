@@ -10,24 +10,22 @@ let materials = null;
 const ProductTab = ({ customAttributes }) => {
   const [tab, setTab] = useState(1);
 
-  
-    
   if (customAttributes) {
     customAttributes.forEach((item) => {
       switch (item.attribute_code) {
         case "description": {
           return (description = item.value);
         }
-        case "material":        
-         const abc= item.value.split(',');
-        return materials= abc.map((item)=>materialAttributes[item])
-
+        case "material":
+          const abc = item.value.split(",");
+          return (materials = abc.map((item) => materialAttributes[item]));
       }
     });
   }
 
-  const GenralStyle= description.split('&bull;');
-  //console.log("des", GenralStyle );
+  const GenralStyle = description.split("&bull;");
+
+  // console.log(description);
   return (
     <div className="prod-tab-contaier">
       <div className="prod-tab-sub-container">
@@ -63,22 +61,24 @@ const ProductTab = ({ customAttributes }) => {
             <div className="prod-tab-2">
               <table>
                 <tbody>
-                  <tr>
-                    <th> Style </th>
-                    <td>{
-                     HtmlParser (GenralStyle[1].replace('.<br />','')+','+GenralStyle[2])
-                    }</td>
-                  </tr>
-
-                  <tr>
-                    <th>Material </th>
-                    <td> 
-                    
-                   {
-                   HtmlParser( materials.join(','))
-                   }
-                    </td>
-                  </tr>
+                  {GenralStyle.length > 1 ? (
+                    <tr>
+                      <th> Style </th>
+                      <td>
+                        {HtmlParser(
+                          GenralStyle[1].replace(".<br />", "") +
+                            "," +
+                            GenralStyle[2]
+                        )}
+                      </td>
+                    </tr>
+                  ) : null}
+                  {materials ? (
+                    <tr>
+                      <th>Material </th>
+                      <td>{HtmlParser(materials.join(","))}</td>
+                    </tr>
+                  ) : null}
 
                   <tr>
                     <th>Pattern </th>

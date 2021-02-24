@@ -1,8 +1,9 @@
 .color-box {
     margin: 0 7px 0 0;
-    width : 52px;
-    height: 34px;
+    width : 45px;
+    height: 31px;
     cursor: pointer;
+    border: 1px solid #dadada;
 
     &:hover{
         border: 1px solid black;

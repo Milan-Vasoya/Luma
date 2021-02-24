@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./RelatedProduct.component.scss";
 import RelatedProducTypes from "./types-of-relatedProducts/relatedProduct.types";
 
-const crosssell = [];
-const upsell = [];
-const related = [];
+let crosssell = [];
+let upsell = [];
+let related = [];
 const RealtedProducts = ({ prodLinks }) => {
   const [state, changeState] = useState(false);
   useEffect(() => {

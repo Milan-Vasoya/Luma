@@ -8,7 +8,7 @@ const PageNotFound = () => {
   const params = useParams();
 
   const pageId = useSelector((state) => selectIdFromAttr(state, params.catId));
-  console.log("[subCat]", pageId);
+  // console.log("[subCat]", pageId);
 
   return (
     <MasterContainer>

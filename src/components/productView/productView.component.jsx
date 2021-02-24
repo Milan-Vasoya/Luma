@@ -4,32 +4,40 @@ import ProductDisplay from "../Product-display-container/Product-display-cotaine
 import ProductTab from "../product-tab/product-tab.components";
 import fetchProduct from "../fetchProducts/fetchProducts";
 import RelatedProduct from "../relatedProduct/RelatedProduct.component";
+import { useParams } from 'react-router-dom';
 
 
 const Productview = () => {
-  const [product, setProduct] = useState({});
+  let params = useParams();
+let sku=params.sku;
+
+
+  const [product, setProduct] = useState(null);
   useEffect(() => {
     fetchProduct(
-      "https://m241full.digitsoftsol.co/index.php/rest/V1/products/WS06?fields=name,price,sku,type_id,extension_attributes[stock_item,configurable_product_options],media_gallery_entries,product_links,custom_attributes"
+      `https://m241full.digitsoftsol.co/index.php/rest/V1/products/${sku}?fields=name,price,sku,type_id,extension_attributes[stock_item,configurable_product_options],media_gallery_entries,product_links,custom_attributes`
     ).then((data) => setProduct(data));
-  }, []);
+
+    return ()=> setProduct(null)
+    
+  }, [sku]);
 
   //name,price,SKU,sizes,colors,inStock,imageGallarry
   let images = null;
-  if (product.media_gallery_entries) {
+  if (product) {
     images = product.media_gallery_entries.map((item) => item.file);
   }
 
   let customAttributes;
-  if (product.custom_attributes) {
+  if (product) {
     customAttributes = product.custom_attributes;
-    console.log(product);
+    // console.log(product);
   }
 
   return (
     <div className="prodView">
       <div className="prodView-display">
-        {product.extension_attributes ? (
+        {product ? (
           <ProductDisplay
             prod={{
               name: product.name,
@@ -52,7 +60,7 @@ const Productview = () => {
       </div>
 
       <div>
-        {product.product_links ? (
+        {product ? (
           <RelatedProduct prodLinks={product.product_links} />
         ) : null}
       </div>

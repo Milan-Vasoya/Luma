@@ -4,7 +4,7 @@ import CategoriesWisePage from "../../components/PageCategories/PageCategories.c
 const CatPage = () => {
 const match =useRouteMatch();
   return <div> 
-  <Route path={`${match.url}/:catId`} component={CategoriesWisePage} />
+  <Route exact path={`${match.path}/:catId`} component={CategoriesWisePage} />
   </div>;
 };
 

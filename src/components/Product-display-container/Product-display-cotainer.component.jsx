@@ -4,11 +4,7 @@ import ImageSlideShow from "../ImageSlideShow/imageSlideshow.componenet";
 import CustomButton from "../Custom-Component/button/custom-button.component";
 import ConfigurableProduct from "../configurableProduct/configurable.product";
 
-const ProductDisplayContainer = ({prod}) => {
-
- 
-  
-
+const ProductDisplayContainer = ({ prod }) => {
   return (
     <div className="product-display-container">
       <div className="product-display-info">
@@ -55,17 +51,23 @@ const ProductDisplayContainer = ({prod}) => {
               <span className="product-display-price">${prod.price}</span>
             </div>
             <div className="product-display-stock">
-              <span className="product-display-stock-label">{prod.inStock?"IN STOCK":"OUT OF STOCK"}</span>
+              <span className="product-display-stock-label">
+                {prod.inStock ? "IN STOCK" : "OUT OF STOCK"}
+              </span>
               <span>SKU#: {prod.sku}</span>
             </div>
           </div>
 
           <div className="product-display-main">
             <div className="product-display-variation">
-              {// colors and sizes
-                
-              <ConfigurableProduct configOptions={prod.options} label={true}/>
-              
+              {
+                // colors and sizes
+                prod.options ? (
+                  <ConfigurableProduct
+                    configOptions={prod.options}
+                    label={true}
+                  />
+                ) : null
               }
             </div>
 

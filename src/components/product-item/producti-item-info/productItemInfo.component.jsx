@@ -1,49 +1,36 @@
 import React, { useEffect, useState } from "react";
 import "./productItemInfo.styles.scss";
 import fetchProducts from "../../fetchProducts/fetchProducts";
-// import ColorAttributes from "../../../attributes/Colors/Colors.attributes";
-// import SizeAttributes from "../../../attributes/Sizes/Sizes.attributes";
-// import ProductColor from "../../productColors/productColor.component";
-// import ProductSize from "../../configurableProduct/productSizes/productSizes.component";
+import { useHistory } from 'react-router-dom';
 import ConfigurableProduct from "../../configurableProduct/configurable.product";
 
-// let sizes = null;
-// let colors = null;
 const ImagePath = "https://m241full.digitsoftsol.co/pub/media/catalog/product";
 
 const ProductItemInfo = ({ sku }) => {
+  const history =useHistory();
   const [product, setProduct] = useState({});
   useEffect(() => {
     fetchProducts(
-      `https://m241full.digitsoftsol.co/index.php/rest/V1/products/${sku}?fields=id,name,type_id,price,media_gallery_entries,extension_attributes[configurable_product_options]`
+      `https://m241full.digitsoftsol.co/index.php/rest/V1/products/${sku}?fields=id,sku,name,type_id,price,media_gallery_entries,extension_attributes[configurable_product_options]`
     ).then((data) => setProduct(data));
 
     return () => {
-      // sizes = null;
-      // colors = null;
       setProduct(null);
+      configOptions = null;
     };
   }, [sku]);
 
-  // if(product.type_id==='configurable'){
-  //   console.log(product.extension_attributes)
-  // }
   let configOptions = null;
 
   if (product.type_id === "configurable") {
     configOptions = product.extension_attributes.configurable_product_options;
-    // attributes.forEach((item) => {
-    //   if (item.label === "Color") {
-    //     colors = ColorAttributes(item.values);
-    //   } else {
-    //     sizes = SizeAttributes(item.values);
-    //   }
-    // });
   }
 
   return (
-    <div className="product-item-info">
-      <div className="product-item-image">
+    <div className="product-item-info" >
+      
+   
+    <div className="product-item-image"   onClick={()=>history.push(`/product/${product.sku}`)} >
         {product.id ? (
           <img
             src={`${ImagePath}${product.media_gallery_entries[0].file}`}

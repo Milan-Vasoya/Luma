@@ -15,7 +15,7 @@ const ProductItem = ({pageId = 21}) => {
     const newData = [];
     
     data.forEach((item, index) => {
-      if (index < 10) {
+      if (index < 2) {
         newData.push(item);
       }
     });
