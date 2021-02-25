@@ -23,6 +23,7 @@ $grey     :#6e716e;
                 position: absolute;
                 right   : 5px;
                 top: 10px;
+                z-index: 5;
 
 
                 .link__signin {
@@ -50,6 +51,11 @@ $grey     :#6e716e;
             height         : 100%;
             align-items    : center;
             justify-content: center;
+            z-index: 5;
+            
+            .logo{
+                cursor: pointer;
+            }
         }
 
         .serchbarContainer {

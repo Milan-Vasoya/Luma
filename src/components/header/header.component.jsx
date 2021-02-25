@@ -31,7 +31,7 @@ const Header = () => {
 
       <div className="header__wrapper">
         <Link to="/" className="logoContainer">
-          <LumaLogo />
+          <LumaLogo className='logo' />
         </Link>
 
         <div className="wapper">
