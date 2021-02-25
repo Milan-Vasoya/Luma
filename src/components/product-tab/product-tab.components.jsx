@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import "./product-tab.styles.scss";
 import HtmlParser from "html-react-parser";
 import materialAttributes from "../../attributes/materials/materials.attributes";
-import { generatePath } from "react-router";
+
 
 let description = "";
 

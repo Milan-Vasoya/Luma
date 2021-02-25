@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./productItemInfo.styles.scss";
-import fetchProducts from "../../fetchProducts/fetchProducts";
+import fetchdata from "../../fetchData/withAdminToken/fetchdata";
 import { useHistory } from 'react-router-dom';
 import ConfigurableProduct from "../../configurableProduct/configurable.product";
 
@@ -10,7 +10,7 @@ const ProductItemInfo = ({ sku }) => {
   const history =useHistory();
   const [product, setProduct] = useState({});
   useEffect(() => {
-    fetchProducts(
+    fetchdata(
       `https://m241full.digitsoftsol.co/index.php/rest/V1/products/${sku}?fields=id,sku,name,type_id,price,media_gallery_entries,extension_attributes[configurable_product_options]`
     ).then((data) => setProduct(data));
 

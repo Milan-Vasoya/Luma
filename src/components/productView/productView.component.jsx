@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./productView.styles.scss";
 import ProductDisplay from "../Product-display-container/Product-display-cotainer.component";
 import ProductTab from "../product-tab/product-tab.components";
-import fetchProduct from "../fetchProducts/fetchProducts";
+import fetchdata from "../fetchData/withAdminToken/fetchdata";
 import RelatedProduct from "../relatedProduct/RelatedProduct.component";
 import { useParams } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ let sku=params.sku;
 
   const [product, setProduct] = useState(null);
   useEffect(() => {
-    fetchProduct(
+    fetchdata(
       `https://m241full.digitsoftsol.co/index.php/rest/V1/products/${sku}?fields=name,price,sku,type_id,extension_attributes[stock_item,configurable_product_options],media_gallery_entries,product_links,custom_attributes`
     ).then((data) => setProduct(data));
 

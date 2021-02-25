@@ -1,6 +1,6 @@
 const adminToken = "m1pb1c5up68btc5vue0nv5nfm877f0pv";
 
-const fetchProducts = (url) => {
+const fetchdata = (url) => {
   return fetch(url, {
     method: "GET",
     headers: {
@@ -9,4 +9,4 @@ const fetchProducts = (url) => {
   }).then((res) => res.json());
 };
 
-export default fetchProducts;
+export default fetchdata;

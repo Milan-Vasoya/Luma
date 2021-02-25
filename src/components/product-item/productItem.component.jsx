@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductItemInfo from "./producti-item-info/productItemInfo.component";
 import "./productItem.styles.scss";
-import fetchProducts from "../fetchProducts/fetchProducts";
+import fetchdata from "../fetchData/withAdminToken/fetchdata";
 
 
 let IsComponentMount = false;
@@ -29,7 +29,7 @@ const ProductItem = ({pageId = 21}) => {
 
     
 
-      fetchProducts(
+    fetchdata(
         `https://m241full.digitsoftsol.co/index.php/rest/V1/categories/${pageId}/products?fields=sku`
       ).then((data) => setTop10(data));
       

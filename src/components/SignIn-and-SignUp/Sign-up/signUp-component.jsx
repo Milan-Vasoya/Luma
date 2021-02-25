@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import FormInput from "../../Custom-Component/Form-input/form-input.component";
 import "./signUp.styles.scss";
 import CustomButtom from "../../Custom-Component/button/custom-button.component";
+import postData from "../../postData/Simple/postdata";
 
-const SignUp = ({ signUpStart }) => {
+const url = "https://m241full.digitsoftsol.co/index.php/rest/V1/customers";
+
+const SignUp = () => {
   const [userCredential, setUserCredential] = useState({
-    fname: "",
-    lname:"",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -14,8 +17,8 @@ const SignUp = ({ signUpStart }) => {
   });
 
   const {
-    fname,
-    lname,
+    firstname,
+    lastname,
     email,
     password,
     confirmPassword,
@@ -29,16 +32,26 @@ const SignUp = ({ signUpStart }) => {
       setUserCredential({ ...userCredential, error: error });
       return;
     }
-    
-   alert('clicked')
+
+    // console.log(userCredential);
+
+    const data = {
+      customer: {
+        firstname,
+        lastname,
+        email,
+      },
+      password,
+    };
+
+    postData(url, data)
+      .then((data) => console.log(data))
+      .catch((e) => console.log(e));
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserCredential(() => ({ ...userCredential, [name]: value }));
-
-  
-
   };
 
   return (
@@ -49,21 +62,21 @@ const SignUp = ({ signUpStart }) => {
       <form onSubmit={formSubmit}>
         <FormInput
           type="text"
-          name="fname"
-          value={fname}
+          name="firstname"
+          value={firstname}
           onChangeHandler={handleChange}
           label="First Name"
           required
         />
-        
+
         <FormInput
-        type="text"
-        name="lname"
-        value={lname}
-        onChangeHandler={handleChange}
-        label="Last Name"
-        required
-      />
+          type="text"
+          name="lastname"
+          value={lastname}
+          onChangeHandler={handleChange}
+          label="Last Name"
+          required
+        />
         <FormInput
           type="email"
           name="email"
@@ -89,7 +102,9 @@ const SignUp = ({ signUpStart }) => {
           required
         />
 
-        <CustomButtom className="custom-button" onClickHandle={()=>console.log(userCredential)} >Sign Up</CustomButtom>
+        <CustomButtom className="custom-button" onClickHandle={formSubmit}>
+          Sign Up
+        </CustomButtom>
       </form>
     </div>
   );

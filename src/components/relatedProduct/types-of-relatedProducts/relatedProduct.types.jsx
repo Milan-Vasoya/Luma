@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import fetchProducts from "../../fetchProducts/fetchProducts";
+import fetchdata from "../../fetchData/withAdminToken/fetchdata";
 import "./relatedProduct.types.scss";
 import { useHistory } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ const TypesOfRelated = ({ sku }) => {
   const history =useHistory();
   const [product, setProduct] = useState(null);
   useEffect(() => {
-    fetchProducts(
+    fetchdata(
       `https://m241full.digitsoftsol.co/index.php/rest/V1/products/${sku}?fields=id,sku,name,price,media_gallery_entries[file]`
     ).then((data) => setProduct(data));
 

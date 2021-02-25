@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import './signIn.styles.scss';
+import "./signIn.styles.scss";
 import FormInput from "../../Custom-Component/Form-input/form-input.component";
 import CustomButton from "../../Custom-Component/button/custom-button.component";
+import postData from "../../postData/Simple/postdata";
 
+const url =
+  "https://m241full.digitsoftsol.co/index.php/rest/V1/integration/customer/token";
 
 const SignIn = () => {
   const [userCredential, setUserCredential] = useState({
@@ -14,8 +17,17 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(userCredential)
-    //  emailSignInStart(email, password);
+    // console.log(userCredential);
+    // emailSignInStart(email, password);
+
+    const data = {
+      username: email,
+      password,
+    };
+    
+    postData(url, data)
+      .then((data) => console.log(data))
+      .catch((e) => console.log(e));
   };
 
   const inputChangeHandler = (e) => {
@@ -46,15 +58,13 @@ const SignIn = () => {
           required
         />
         <div className="buttons-div">
-          <CustomButton  className="custom-button" onClickHandle={()=>alert('signIn clicked')} type="submit"
-      
-          >
+          <CustomButton className="custom-button" type="submit">
             Sign In
           </CustomButton>
           <CustomButton
             className="google-sign-in custom-button"
             type="button"
-            onClick={()=>alert('clicked')}
+            onClick={() => alert("Google sign In")}
           >
             Sign In With Google
           </CustomButton>
@@ -63,7 +73,5 @@ const SignIn = () => {
     </div>
   );
 };
-
-
 
 export default SignIn;
