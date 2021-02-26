@@ -3,11 +3,15 @@ import "./signIn.styles.scss";
 import FormInput from "../../Custom-Component/Form-input/form-input.component";
 import CustomButton from "../../Custom-Component/button/custom-button.component";
 import postData from "../../postData/Simple/postdata";
+import { useDispatch } from 'react-redux';
+import { setCustomerToken } from "../../../redux/customer/customer.action";
 
 const url =
   "https://m241full.digitsoftsol.co/index.php/rest/V1/integration/customer/token";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+
   const [userCredential, setUserCredential] = useState({
     email: "",
     password: "",
@@ -26,7 +30,7 @@ const SignIn = () => {
     };
     
     postData(url, data)
-      .then((data) => console.log(data))
+      .then((token) => dispatch(setCustomerToken(token)))
       .catch((e) => console.log(e));
   };
 

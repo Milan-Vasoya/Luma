@@ -17,6 +17,10 @@ import ProductTab from "./components/product-tab/product-tab.components";
 // import data from "./attributes/Colors/Colors.attributes";
 import CatPage from "./Pages/catPage/catPage.component";
 import product from "./Pages/product/product";
+import cartPage from "./Pages/cart/cart.page";
+
+
+
 const App = () => {
   return (
     <div>
@@ -37,8 +41,8 @@ const App = () => {
       <Route path="/prodDisplay" component={ProductDisplay} />
       <Route  path='/product' component={product} />
       <Route path="/catPage" component={CatPage} />
-        
-        
+      <Route path="/cart" component={cartPage} />
+      
         <Route path="/signIn" component={SignInSignUpPage} />
         <Route component={PageNoteFound} />
       </Switch>

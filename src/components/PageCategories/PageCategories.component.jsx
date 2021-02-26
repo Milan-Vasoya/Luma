@@ -1,14 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectIdFromAttr } from "../../redux/PageReducer/categoryPage.selector";
 import MasterContainer from "../masterContainer/master.container";
 import ProductItem from "../product-item/productItem.component";
+import rootCategorie from '../../attributes/rootCategories/RootCategories.atttributes';
 const PageNotFound = () => {
   const params = useParams();
 
-  const pageId = useSelector((state) => selectIdFromAttr(state, params.catId));
-  // console.log("[subCat]", pageId);
+  const pageId = rootCategorie[params.catId] ;
+  
 
   return (
     <MasterContainer>
