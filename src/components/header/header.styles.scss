@@ -19,6 +19,8 @@ $grey     :#6e716e;
 
             position: relative;
 
+
+
             .header__signinLink {
                 position: absolute;
                 right   : 5px;
@@ -30,6 +32,16 @@ $grey     :#6e716e;
                     text-decoration: none;
                     color          : white;
                 }
+
+               
+            }
+
+            .link__LogOut{
+                position: absolute;
+                right   : 13px;
+                top: 10px;
+                z-index: 5;
+                cursor: pointer;
             }
         }
     }

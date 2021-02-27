@@ -9,29 +9,38 @@ import CartDropDown from "../cart/cart-dropdown/CartDropDown.component";
 import { useSelector, useDispatch } from "react-redux";
 import { selectHidden } from "../../redux/cart/cart.selector";
 import { toggleHidden } from "../../redux/cart/cart.action";
+import { selectCustomerToken } from "../../redux/customer/customer.selector";
+import { signOutstart } from "../../redux/customer/customer.action";
 
 const Header = () => {
   const hidden = useSelector(selectHidden);
+  const custToken = useSelector(selectCustomerToken);
   const dispatch = useDispatch();
   return (
     <div className="header">
       <div className="header__panel">
         <div className="header_panel_container">
-          <span className="header__signinLink">
-            <Link to="/signIn" className="link__signin">
-              Sign In
-            </Link>
-            <span> or </span>
-            <a href="/" className="link__signin">
-              Create Account
-            </a>
-          </span>
+          {custToken ? (
+           
+            <span className="link__LogOut" onClick={()=>dispatch(signOutstart())}>LogOut</span>
+            
+            ) : (
+            <span className="header__signinLink">
+              <Link to="/signIn" className="link__signin">
+                Sign In
+              </Link>
+              <span> or </span>
+              <Link to="/signIn" className="link__signin">
+                Create Account
+              </Link>
+            </span>
+          )}
         </div>
       </div>
 
       <div className="header__wrapper">
         <Link to="/" className="logoContainer">
-          <LumaLogo className='logo' />
+          <LumaLogo className="logo" />
         </Link>
 
         <div className="wapper">
@@ -53,7 +62,7 @@ const Header = () => {
         //hide whole div
 
         hidden ? null : (
-          <div className='header-drop-cont'>
+          <div className="header-drop-cont">
             <div
               className="header-drop-hidden"
               onClick={() => dispatch(toggleHidden())}

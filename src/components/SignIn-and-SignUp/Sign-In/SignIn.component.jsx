@@ -2,36 +2,33 @@ import React, { useState } from "react";
 import "./signIn.styles.scss";
 import FormInput from "../../Custom-Component/Form-input/form-input.component";
 import CustomButton from "../../Custom-Component/button/custom-button.component";
-import postData from "../../postData/Simple/postdata";
-import { useDispatch } from 'react-redux';
-import { setCustomerToken } from "../../../redux/customer/customer.action";
+import { useDispatch } from "react-redux";
+import TokenGenrator from "../tokenGenrator/tokenGenrator";
 
-const url =
-  "https://m241full.digitsoftsol.co/index.php/rest/V1/integration/customer/token";
-
-const SignIn = () => {
+const SignIn = ({ loading }) => {
   const dispatch = useDispatch();
 
   const [userCredential, setUserCredential] = useState({
     email: "",
     password: "",
+    error: "",
   });
 
-  const { email, password } = userCredential;
+  const { email, password, error } = userCredential;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(userCredential);
-    // emailSignInStart(email, password);
+    loading(true);
 
     const data = {
       username: email,
       password,
     };
-    
-    postData(url, data)
-      .then((token) => dispatch(setCustomerToken(token)))
-      .catch((e) => console.log(e));
+
+    TokenGenrator(data, dispatch).catch((error) => {
+      loading(false);
+      setUserCredential({ ...userCredential, error });
+    });
   };
 
   const inputChangeHandler = (e) => {
@@ -43,6 +40,7 @@ const SignIn = () => {
     <div className="sign-in">
       <h2 className="title">I already have an account</h2>
       <span className="title">Sign in with your email and password</span>
+      {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <FormInput
           name="email"
@@ -68,7 +66,7 @@ const SignIn = () => {
           <CustomButton
             className="google-sign-in custom-button"
             type="button"
-            onClick={() => alert("Google sign In")}
+           
           >
             Sign In With Google
           </CustomButton>

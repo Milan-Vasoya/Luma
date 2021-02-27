@@ -3,8 +3,6 @@ import ProductItemInfo from "./producti-item-info/productItemInfo.component";
 import "./productItem.styles.scss";
 import fetchdata from "../fetchData/withAdminToken/fetchdata";
 
-let IsComponentMount = false;
-
 const ProductItem = ({ pageId = 21 }) => {
   // const PageCategoryId = useSelector(selectPageId);
   const [tops, setTops] = useState([]);
@@ -27,6 +25,8 @@ const ProductItem = ({ pageId = 21 }) => {
     fetchdata(
       `https://m241full.digitsoftsol.co/index.php/rest/V1/categories/${pageId}/products?fields=sku`
     ).then((data) => setTop10(data));
+
+    return () => setTops([]);
   }, [pageId]);
 
   return (

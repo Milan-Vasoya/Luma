@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const CartItem = () => {
   const [details, setDetails] = useState(false);
 
-  console.log(details);
+  //console.log(details);
   return (
     <div className="cart-item">
       <div className='image-container'>

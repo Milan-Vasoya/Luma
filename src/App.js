@@ -18,8 +18,17 @@ import ProductTab from "./components/product-tab/product-tab.components";
 import CatPage from "./Pages/catPage/catPage.component";
 import product from "./Pages/product/product";
 import cartPage from "./Pages/cart/cart.page";
+import PublicRoute from "./components/routing/Public.Route";
+import Cookies from "js-cookie";
+import { store } from "./redux/store";
+import demo from "./components/trash/demo.component";
 
 
+
+//set Token
+store.getState().customer.token = Cookies.get("customer_token");
+// const abc = Cookies.get("customer_token");
+// console.log("[app.js]  cookie", abc);
 
 const App = () => {
   return (
@@ -38,16 +47,15 @@ const App = () => {
             </MasterContainer>
           )}
         />
-      <Route path="/prodDisplay" component={ProductDisplay} />
-      <Route  path='/product' component={product} />
-      <Route path="/catPage" component={CatPage} />
-      <Route path="/cart" component={cartPage} />
-      
-        <Route path="/signIn" component={SignInSignUpPage} />
+        <Route path="/prodDisplay" component={ProductDisplay} />
+        <Route path="/product" component={product} />
+        <Route path="/catPage" component={CatPage} />
+        <Route path="/cart" component={cartPage} />
+        <Route path="/demo" component={demo}  />
+
+        <PublicRoute path="/signIn" component={SignInSignUpPage} />
         <Route component={PageNoteFound} />
       </Switch>
-
-
     </div>
   );
 };

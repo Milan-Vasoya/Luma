@@ -1,23 +1,25 @@
 .loader-container{
     width: 99vw;
-    height: 99vh;
-    background: #ccc;
-    opacity: 0.5;
-    display: flex;
-    align-items: center;
+    height: 120vh;
+opacity: .7;
+
+    
+}
+.loader-center{
+  position:absolute;
 }
 
 .loader,
 .loader:before,
 .loader:after {
-  background: #ffffff;
+  background: black;
   -webkit-animation: load1 1s infinite ease-in-out;
   animation: load1 1s infinite ease-in-out;
   width: 1em;
   height: 4em;
 }
 .loader {
-  color: #ffffff;
+  color: black;
   text-indent: -9999em;
   margin: 88px auto;
   position: relative;

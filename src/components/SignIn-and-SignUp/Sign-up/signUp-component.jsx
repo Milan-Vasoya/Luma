@@ -3,10 +3,14 @@ import FormInput from "../../Custom-Component/Form-input/form-input.component";
 import "./signUp.styles.scss";
 import CustomButtom from "../../Custom-Component/button/custom-button.component";
 import postData from "../../postData/Simple/postdata";
+import TokenGenrator from "../tokenGenrator/tokenGenrator";
+import { useDispatch } from "react-redux";
 
 const url = "https://m241full.digitsoftsol.co/index.php/rest/V1/customers";
 
-const SignUp = () => {
+const SignUp = ({ loading }) => {
+  const dispatch = useDispatch();
+
   const [userCredential, setUserCredential] = useState({
     firstname: "",
     lastname: "",
@@ -34,6 +38,7 @@ const SignUp = () => {
     }
 
     // console.log(userCredential);
+    loading(true);
 
     const data = {
       customer: {
@@ -45,8 +50,18 @@ const SignUp = () => {
     };
 
     postData(url, data)
-      .then((data) => console.log(data))
-      .catch((e) => console.log(e));
+      .then((res) =>
+        TokenGenrator({ username: res.email, password }, dispatch).catch(
+          (error) => {
+            loading(false);
+            setUserCredential({ ...userCredential, error });
+          }
+        )
+      )
+      .catch((error) => {
+        loading(false);
+        setUserCredential({ ...userCredential, error });
+      });
   };
 
   const handleChange = (e) => {
@@ -102,9 +117,7 @@ const SignUp = () => {
           required
         />
 
-        <CustomButtom className="custom-button" onClickHandle={formSubmit}>
-          Sign Up
-        </CustomButtom>
+        <CustomButtom className="custom-button">Sign Up</CustomButtom>
       </form>
     </div>
   );

@@ -4,5 +4,5 @@ const selectCustomer= (state) =>state.customer;
 
 export const selectCustomerToken = createSelector(
     [selectCustomer],
-    customer=>customer.token
+    customer=>customer.token?customer.token:null
     );
