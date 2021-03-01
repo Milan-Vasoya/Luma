@@ -1,10 +1,10 @@
-const adminToken = "41iavztqcxbm1dam5g3aprnjfrgtc7pv";
+const CustomerToken = "m94e039qmy2rnqmku1wy2z9svirk0rbo";
 
 const fetchdata = (url) => {
   return fetch(url, {
-    method: "GET",
+    method: "DELETE",
     headers: {
-      Authorization: `Bearer ${adminToken}`,
+      Authorization: `Bearer ${CustomerToken}`,
     },
   }).then((res) => res.json());
 };

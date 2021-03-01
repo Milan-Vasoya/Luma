@@ -17,90 +17,16 @@
     border-collapse: collapse;
     border-spacing : 0;
     width          : 100%;
-    .row {
-
-
-        td {
-            vertical-align: top;
-            padding-top   : 25px;
-        }
-    }
-
+    
     .table-header {
         font-size    : 14px;
         border-bottom: 1px solid #666;
 
         th {
-            padding   : 20px;
+            padding   : 20px 10px;
             text-align: initial;
         }
     }
 
-    .item-continer {
-        display  : flex;
-        font-size: 14px;
-
-        .item-name {
-            font-size: 18px;
-            margin   : 5px 0 20px 0;
-        }
-
-        .cart-img-container {
-            min-width : 170px;
-            min-height: 180px;
-
-            .cart-img {
-                max-width   : 170px;
-                max-height  : 180px;
-                margin-right: 20px;
-            }
-        }
-
-        .item-details {}
-
-        .variation {
-            display       : flex;
-            flex-direction: column;
-
-            .var-item {
-                margin-right: 5px;
-            }
-
-            span {
-                height: 25px;
-            }
-        }
-
-
-    }
-
-    .price {
-        color      : #666;
-        font-size  : 18px;
-        display    : block;
-        line-height: 1;
-        white-space: nowrap;
-        font-weight: 800;
-    }
-
-    .input {
-        height    : 36px;
-        margin-top: -7px;
-        text-align: center;
-        width     : 60px;
-    }
-
-    .icon-container {
-        display: flex;
-        justify-content: flex-end;
-        padding-bottom: 10px;
-        margin: 0 8px;
-        border-bottom: 1px solid #666;
-        .icons {
-            font-size  : 25px;
-            color      : #666;
-            margin-left: 35px;
-            cursor: pointer;
-        }
-    }
+  
 }

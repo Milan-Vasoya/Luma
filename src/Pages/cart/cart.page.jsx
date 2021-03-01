@@ -1,8 +1,22 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
+import CartPageItem from "../../components/cartPage/cartPage.component";
+import fetchData from "../../components/fetchData/withCutomerToken/fetchdata";
 
 import "./cart.styles.scss";
 
-const cartPage = () => {
+const CartPage = () => {
+
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    fetchData(
+      "https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items"
+    ).then((data) => setCartItems(data));
+
+    return () => {
+      setCartItems([]);
+    };
+  }, []);
   return (
     <div className="cart-container">
       <div className="sub-container">
@@ -25,63 +39,13 @@ const cartPage = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                <tr className="row">
-                  <td className="item-continer">
-                    <div className="cart-img-container">
-                      <img
-                        className="cart-img"
-                        src="https://m241full.digitsoftsol.co/pub/media/catalog/product/w/h/wh01-green_main_1.jpg"
-                        alt="img"
-                      ></img>
-                    </div>
 
-                    <div className="item-details">
-                      <div className="item-name">
-                        <a href="/">Neve Studio Dance Jacket</a>
-                      </div>
-                      <div className="variation">
-                        <span>
-                          <strong className="var-item">Size:</strong>M
-                        </span>
-                        <span>
-                          <strong className="var-item">Color:</strong>Purple
-                        </span>
-                      </div>
-                    </div>
-                  </td>
-
-                  <td>
-                    <span>
-                      <span className="price">$69.00</span>
-                    </span>
-                  </td>
-                  <td>
-                    <span>
-                      <input type="text" className="input" />
-                    </span>
-                  </td>
-                  <td>
-                    <span>
-                      <span className="price">$69.00</span>
-                    </span>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td colSpan="4">
-                    <div className="icon-container">
-                      <span className="icons">
-                        <i className="fa fa-pencil" aria-hidden="true"></i>
-                      </span>
-                      <span className="icons">
-                        <i className="fa fa-trash"></i>
-                      </span>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+      
+              {cartItems.map((cartItem) => (
+                <CartPageItem key={cartItem.item_id} cartItem={cartItem} />
+              ))}
+            
+              </table>
           </form>
         </div>
       </div>
@@ -89,4 +53,4 @@ const cartPage = () => {
   );
 };
 
-export default cartPage;
+export default CartPage;

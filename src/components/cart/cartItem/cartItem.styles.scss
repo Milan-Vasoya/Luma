@@ -3,6 +3,7 @@
     display      : flex;
     font-size    : 14px;
     margin: 18px 20px 0 20px;
+    position: relative;
 }
 .image-container{
     min-width: 90px;
@@ -10,6 +11,20 @@
     max-height: 200px;
     max-width : 90px;
 }
+}
+
+
+.item-icons{
+    font-size: 20px;
+    color: #666;
+    position: absolute;
+   right: 10px;
+  bottom: 30px;
+
+    span{
+        margin-left: 15px;
+        cursor: pointer;
+    }
 }
 
 .ca-it-info {
@@ -22,18 +37,7 @@
         
     }
 
-    .item-icons{
-        font-size: 20px;
-        color: #666;
-        position: absolute;
-        right: -35px;
-        bottom: 0;
-
-        span{
-            margin-left: 15px;
-            cursor: pointer;
-        }
-    }
+  
 
     .ca-list-item {
        
@@ -45,11 +49,12 @@
         }
 
         .ca-item-input {
-            font-size  : 16px;
-            padding    : 4px 4px 4px 8px;
-            width      : 42px;
+            font-size: 16px;
+            padding: 2px 4px;
+            width: 42px;
             margin-left: 6px;
-            border     : 0.5px solid #666;
+            text-align: center;
+            border: 0.5px solid #666;
         }
 
         .ca-it-detail-text{
@@ -70,7 +75,7 @@
             }
         }
 
-        .price {
+        .ca-price {
             font-weight: 900;
             color      : black;
         }
