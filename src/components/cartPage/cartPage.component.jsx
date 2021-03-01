@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import fetchData from "../fetchData/withAdminToken/fetchdata";
 import { colorsAttribute } from "../../attributes/Colors/Colors.attributes";
 import { sizesAttribute } from "../../attributes/Sizes/Sizes.attributes";
-import './cartPage.styles.scss';
+import "./cartPage.styles.scss";
 import DeleteData from "../deleteData/WithCustomerToken/deleteData";
+import { deleteItemFromCart } from "../../redux/cart/cart.action";
+import { useDispatch } from "react-redux";
 
 const CartPage = ({
-  cartItem: { item_id,sku, name, price, qty, product_type, product_option },
+  cartItem: { item_id, sku, name, price, qty, product_type, product_option },
 }) => {
   const [image, setImage] = useState("");
 
-
-
+  const dispatch = useDispatch();
   useEffect(() => {
     fetchData(
       `https://m241full.digitsoftsol.co/index.php/rest/V1/products/${sku}?fields=media_gallery_entries[file]`
@@ -24,10 +25,17 @@ const CartPage = ({
       product_option.extension_attributes.configurable_item_options;
   }
 
-  const DeleteItem=(id)=>{
-    DeleteData(`https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items/${id}`)
-    .then((res)=>console.log('[deleteItem]',res))
-  }
+  const DeleteItem = (id) => {
+    DeleteData(
+      `https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items/${id}`
+    )
+      .then((res) =>
+        res === true
+          ? dispatch(deleteItemFromCart(id))
+          : console.log("Delete Items", res)
+      )
+      .catch((e) => console.log("[cartPageComponenet],", e));
+  };
 
   return (
     <tbody>
@@ -105,7 +113,7 @@ const CartPage = ({
             <span className="icons">
               <i className="fa fa-pencil" aria-hidden="true"></i>
             </span>
-            <span className="icons" onClick={()=>DeleteItem(item_id)}>
+            <span className="icons" onClick={() => DeleteItem(item_id)}>
               <i className="fa fa-trash"></i>
             </span>
           </div>

@@ -1,22 +1,13 @@
 import React,{useEffect,useState} from "react";
+import { useSelector } from "react-redux";
 import CartPageItem from "../../components/cartPage/cartPage.component";
-import fetchData from "../../components/fetchData/withCutomerToken/fetchdata";
-
+import { selectCartItems   } from "../../redux/cart/cart.selector";
 import "./cart.styles.scss";
 
 const CartPage = () => {
 
-  const [cartItems, setCartItems] = useState([]);
+  const cartItems = useSelector(selectCartItems);
 
-  useEffect(() => {
-    fetchData(
-      "https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items"
-    ).then((data) => setCartItems(data));
-
-    return () => {
-      setCartItems([]);
-    };
-  }, []);
   return (
     <div className="cart-container">
       <div className="sub-container">
