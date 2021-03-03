@@ -25,4 +25,28 @@ const SizesAttribute = (values) => {
   return values.map((item) => sizesAttribute[item.value_index]);
 };
 
+
+export const ReverseSizesAttribute = {
+  "55 cm" : 91 ,
+     "65 cm" : 92 ,
+     "75 cm" : 93 ,
+     "6 foot" : 94 ,
+     "8 foot" : 95 ,
+     "10 foot" : 96 ,
+     "XS" : 166 ,
+     "S" : 167 ,
+     "M" : 168 ,
+     "L" : 169 ,
+     "XL" : 170 ,
+     "28" : 171 ,
+     "29" : 172 ,
+     "30" : 173 ,
+     "31" : 174 ,
+     "32" : 175 ,
+     "33" : 176 ,
+     "34" : 177 ,
+     "36" : 178 ,
+     "38" : 179 ,
+  
+};
 export default SizesAttribute;

@@ -22,6 +22,8 @@ import PublicRoute from "./components/routing/Public.Route";
 import Cookies from "js-cookie";
 import { store } from "./redux/store";
 import demo from "./components/trash/demo.component";
+import { selectCustomerToken } from "./redux/customer/customer.selector";
+import { useSelector } from "react-redux";
 
 
 
@@ -31,6 +33,9 @@ store.getState().customer.token = Cookies.get("customer_token");
 // console.log("[app.js]  cookie", abc);
 
 const App = () => {
+  const custToken=useSelector(selectCustomerToken);
+  sessionStorage.setItem('customerToken',custToken)
+
   return (
     <div>
       <Header />

@@ -1,8 +1,7 @@
-
-const CustomerToken = "nulelfz30d3rpyu8ev78houmpjlnyarz";
-
+const CustomerToken = "w870m6bmxicfvx4flfou0q3udwnbydpf";
 
 const fetchdata = (url) => {
+
   return fetch(url, {
     method: "GET",
     headers: {
@@ -19,4 +18,4 @@ const fetchdata = (url) => {
     )
 };
 
-export default fetchdata;
+ export default fetchdata;

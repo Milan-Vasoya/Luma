@@ -1,7 +1,7 @@
 const RootCategories = {
   WhatsNew: "38",
-  Women: "20",
-  Men: "11",
+  Women: "30", //20
+  Men: "21", // 11
   Gear: "3",
   Collections: "7",
   Training: "9",

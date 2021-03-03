@@ -4,7 +4,7 @@ import { colorsAttribute } from "../../attributes/Colors/Colors.attributes";
 import { sizesAttribute } from "../../attributes/Sizes/Sizes.attributes";
 import "./cartPage.styles.scss";
 import DeleteData from "../deleteData/WithCustomerToken/deleteData";
-import { deleteItemFromCart } from "../../redux/cart/cart.action";
+import { deleteItemFromCartStart } from "../../redux/cart/cart.action";
 import { useDispatch } from "react-redux";
 
 const CartPage = ({
@@ -26,15 +26,12 @@ const CartPage = ({
   }
 
   const DeleteItem = (id) => {
-    DeleteData(
-      `https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items/${id}`
-    )
-      .then((res) =>
-        res === true
-          ? dispatch(deleteItemFromCart(id))
-          : console.log("Delete Items", res)
+    dispatch(
+      deleteItemFromCartStart(
+        id,
+        `https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items/${id}`
       )
-      .catch((e) => console.log("[cartPageComponenet],", e));
+    );
   };
 
   return (
@@ -110,7 +107,12 @@ const CartPage = ({
       <tr>
         <td colSpan="4">
           <div className="icon-container">
-            <span className="icons">
+            <span
+              className="icons"
+              onClick={() =>
+                alert(product_type === "configurable" ? sku.split("-")[0] : sku)
+              }
+            >
               <i className="fa fa-pencil" aria-hidden="true"></i>
             </span>
             <span className="icons" onClick={() => DeleteItem(item_id)}>

@@ -1,4 +1,9 @@
-const CustomerToken = "nulelfz30d3rpyu8ev78houmpjlnyarz";
+import Cookies from 'js-cookie';
+
+let token = Cookies.get("customer_token");
+let CustomerToken = token?token: "jowt6dd03ofw8k7acb8n05hjklhfueym";
+
+
 
 const fetchdata = (url) => {
   return fetch(url, {

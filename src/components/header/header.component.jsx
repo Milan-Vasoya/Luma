@@ -12,8 +12,10 @@ import { toggleHidden } from "../../redux/cart/cart.action";
 import { selectCustomerToken } from "../../redux/customer/customer.selector";
 import { signOutstart } from "../../redux/customer/customer.action";
 
+
+
 const Header = () => {
-  const hidden = useSelector(selectHidden);
+ const hidden = useSelector(selectHidden);
   const custToken = useSelector(selectCustomerToken);
   const dispatch = useDispatch();
   return (
@@ -49,8 +51,9 @@ const Header = () => {
               type="text"
               placeholder="Search Products"
               className="serchBar"
+              
             />
-            <button className="btn">
+            <button className="btn"  onClick={()=>alert('search')}>
               <SearchLogo className="seachIcon" />
             </button>
           </div>

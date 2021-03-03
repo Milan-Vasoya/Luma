@@ -14,9 +14,22 @@ export const colorsAttribute = {
 };
 
 const ColorsAttribute = (values) => {
-
-
   return values.map((item) => colorsAttribute[item.value_index]);
+};
+
+export const ReverseColorsAttribute = {
+  "Black": 49,
+  "Blue": 50,
+  "Brown": 51,
+  "Gray": 52,
+  "Green": 53,
+  "Lavender": 54,
+  "Multi": 55,
+  "Orange": 56,
+  "Purple": 57,
+  "Red": 58,
+  "White": 59,
+  "Yellow": 60,
 };
 
 export default ColorsAttribute;
