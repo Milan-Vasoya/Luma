@@ -1,5 +1,5 @@
 import cartActionType from "./cart.type";
-import { deleteCartItem } from "./cart.utils";
+import { deleteCartItem,updateCartItem } from "./cart.utils";
 const INITIAL_STATE = {
   hidden: true,
   items: [],
@@ -32,7 +32,11 @@ const CartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         items: deleteCartItem(state.items, action.id),
       };
-
+    case cartActionType.UPDATE_ITEM_IN_CART_SUCCESS:
+      return{
+        ...state,
+        items:updateCartItem(state.items,action.cartItem ,action.id)
+      }
     default:
       return state;
   }

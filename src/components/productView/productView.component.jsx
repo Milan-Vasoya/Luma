@@ -4,11 +4,14 @@ import ProductDisplay from "../Product-display-container/Product-display-cotaine
 import ProductTab from "../product-tab/product-tab.components";
 import fetchdata from "../fetchData/withAdminToken/fetchdata";
 import RelatedProduct from "../relatedProduct/RelatedProduct.component";
-import { useParams } from "react-router-dom";
+import { useParams,useLocation } from "react-router-dom";
 
 const Productview = () => {
   let params = useParams();
   let sku = params.sku;
+
+  const EditItems = useLocation().state;
+ console.log('editItems',EditItems)
 
   const [product, setProduct] = useState(null);
   useEffect(() => {
@@ -32,7 +35,7 @@ const Productview = () => {
   return (
     <div className="prodView">
       <div className="prodView-display">
-        {product ? <ProductDisplay prod={{ ...product, images }} /> : null}
+        {product ? <ProductDisplay prod={{ ...product, images }} EditItems={EditItems} /> : null}
 
         <div className="prodView-tab">
           {customAttributes ? (

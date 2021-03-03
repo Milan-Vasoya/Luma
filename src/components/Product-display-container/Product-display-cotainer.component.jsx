@@ -1,25 +1,26 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import "./product-display-container.styles.scss";
 import ImageSlideShow from "../ImageSlideShow/imageSlideshow.componenet";
 import CustomButton from "../Custom-Component/button/custom-button.component";
 import ConfigurableProduct from "../configurableProduct/configurable.product";
 import validate from "../validate/prod-add-on-display";
-import postData from "../postData/withCustomerToken/postData";
-import { addItemToCartStart } from "../../redux/cart/cart.action";
+import {
+  addItemToCartStart,
+  updateItemIncartStart,
+} from "../../redux/cart/cart.action";
 import { useDispatch } from "react-redux";
 
 export const imageContext = createContext({
-
   setImg: () => {},
 });
 
 const ProductDisplayContainer = ({
+  EditItems,
   prod: { name, price, images, sku, extension_attributes, type_id },
 }) => {
   const inStock = extension_attributes.stock_item.is_in_stock;
   const options = extension_attributes.configurable_product_options;
-const dispatch = useDispatch();
-
+  const dispatch = useDispatch();
 
   const [img, setImg] = useState("");
 
@@ -39,6 +40,12 @@ const dispatch = useDispatch();
 
   const [itemData, setItemData] = useState(data);
 
+  useEffect(() => {
+    if (EditItems) {
+      setItemData({ ...data, qty: EditItems.qty });
+    }
+  }, [EditItems]);
+
   const configItemSetter = (value) =>
     setItemData({
       ...itemData,
@@ -50,18 +57,35 @@ const dispatch = useDispatch();
     });
 
   const onPostItem = (data) => {
-    console.log(data)
+    // console.log(data);
     const newData = {
       cartItem: {
         ...data,
       },
     };
 
-    dispatch(addItemToCartStart(
-      "https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items",
-      newData))
-    
-     
+    dispatch(
+      addItemToCartStart(
+        "https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items",
+        newData
+      )
+    );
+  };
+
+  const onUpdateItem = (data) => {
+    console.log("update Data", data);
+    const newData = {
+      cartItem: {
+        ...data,
+      },
+    };
+    dispatch(
+      updateItemIncartStart(
+        `https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items/${EditItems.id}`,
+        newData,
+        EditItems.id
+      )
+    );
   };
 
   //console.log(itemData);
@@ -129,6 +153,14 @@ const dispatch = useDispatch();
                       sku={sku}
                       label={true}
                       configItemSetter={configItemSetter}
+                      EditItems={
+                        EditItems
+                          ? {
+                              size: EditItems.size,
+                              color: EditItems.color,
+                            }
+                          : EditItems
+                      }
                     />
                   </imageContext.Provider>
                 ) : null
@@ -151,17 +183,31 @@ const dispatch = useDispatch();
             </div>
 
             <div className="product-display-add">
-              <CustomButton
-                className="google-sign-in custom-button"
-                onClickHandle={() => {
-                  const validation = validate(itemData);
-                  validation === true
-                    ? onPostItem(itemData)
-                    : alert(validation);
-                }}
-              >
-                Add To Cart
-              </CustomButton>
+              {EditItems ? (
+                <CustomButton
+                  className="google-sign-in custom-button"
+                  onClickHandle={() => {
+                    const validation = validate(itemData);
+                    validation === true
+                      ? onUpdateItem(itemData)
+                      : alert(validation);
+                  }}
+                >
+                  UPDATE CART
+                </CustomButton>
+              ) : (
+                <CustomButton
+                  className="google-sign-in custom-button"
+                  onClickHandle={() => {
+                    const validation = validate(itemData);
+                    validation === true
+                      ? onPostItem(itemData)
+                      : alert(validation);
+                  }}
+                >
+                  Add To Cart
+                </CustomButton>
+              )}
             </div>
 
             <div className="product-display-links">

@@ -2,6 +2,7 @@ import { takeLatest,put,all ,call } from 'redux-saga/effects';
 import customerActionType from "./customer.type";
 import Cookies from 'js-cookie' ;
 import { setCustomerToken,clearCustomerToken} from "./customer.action";
+import { clearCartItems } from "../cart/cart.action";
 import CookieName from "../../components/Cookies/Cookies.name";
 
 export function* customerTokenSettter({token:custToken}){
@@ -19,6 +20,7 @@ export  function* onSignInStart(){
 export function* customerTokenCleared(){
     yield Cookies.remove(CookieName.customer_Token)
     yield put(clearCustomerToken())
+    yield put(clearCartItems())
 }
 
 export function* onSignOutStart(){

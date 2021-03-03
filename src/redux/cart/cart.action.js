@@ -26,6 +26,22 @@ export const addItemTocartSuccess= (cartItem)=>({
     cartItem
 });
 
+
+
+export const updateItemIncartStart= (url,itemInfo,id)=>({
+    type:cartActionType.UPDATE_ITEM_IN_CART_START,
+    url,itemInfo,id
+});
+
+export const updateItemIncartSuccess= (cartItem,id)=>({
+    type:cartActionType.UPDATE_ITEM_IN_CART_SUCCESS,
+    cartItem,id
+});
+
+
+
+
+
 export const clearCartItems= ()=>({
     type:cartActionType.CLEAR_CART_ITEMS
 });

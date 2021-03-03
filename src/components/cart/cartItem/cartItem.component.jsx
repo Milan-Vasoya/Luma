@@ -17,10 +17,7 @@ const CartItem = ({
       `https://m241full.digitsoftsol.co/index.php/rest/V1/products/${sku}?fields=media_gallery_entries[file]`
     ).then((data) => setImage(data.media_gallery_entries[0].file));
 
-    return ()=>{
-      setImage("")
-      setDetails(false)
-    }
+    return ()=>setDetails("")
   }, [sku]);
 
   

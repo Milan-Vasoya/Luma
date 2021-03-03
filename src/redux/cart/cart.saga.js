@@ -5,8 +5,30 @@ import {
   setCartItemSuccess,
   deleteItemFromCartSuccess,
   addItemTocartSuccess,
+  updateItemIncartSuccess
 } from "../cart/cart.action";
 import { signOutstart } from "../customer/customer.action";
+
+
+export function* updateDataWithCustToken(url, data) {
+  const CustomerToken = yield select(selectCustomerToken);
+  const res = yield fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${CustomerToken}`,
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (res.status === 200) {
+    return res.json();
+  } else {
+    const error = yield res.json();
+    const message = yield error.message;
+    throw new Error(message);
+  }
+}
 
 export function* deleteDataCartItem(url) {
   // yield console.log(url)
@@ -102,6 +124,23 @@ export function* onAddItemToCartStart() {
   yield takeLatest(cartActionType.ADD_ITEM_TO_CART_START, addItemTocart);
 }
 
+
+
+export function* updateItemIncart({ url, itemInfo,id }) {
+  try {
+    const cartItem = yield updateDataWithCustToken(url, itemInfo);
+    const itemToUpdate = yield cartItem;
+    console.log('update Item',itemToUpdate)
+    yield put(updateItemIncartSuccess(itemToUpdate,id));
+  } catch (e) {
+    yield console.log("[cartSaga] error", e);
+  }
+}
+
+export function* onUpdateItemInCartStart() {
+  yield takeLatest(cartActionType.UPDATE_ITEM_IN_CART_START,updateItemIncart );
+}
+
 export function* SetCartItems() {
   try {
     const cartItems = yield fecthCustomerData(
@@ -125,5 +164,6 @@ export default function* CustomerSaga() {
     call(onSetCartItemsStart),
     call(onAddItemToCartStart),
     call(onDeleteItemFromCartStart),
+    call(onUpdateItemInCartStart)
   ]);
 }

@@ -15,7 +15,7 @@ const ConfigurableProduct = ({
   label = false,
   sku,
   configItemSetter,
-
+  EditItems={ size: "", color: "" }
 }) => {
   let sizes = null;
   let colors = null;
@@ -30,7 +30,7 @@ const ConfigurableProduct = ({
   const variationSetter = (name, value) =>
     setVariation({ ...variation, [name]: value });
 
-  const [active, setActive] = useState({ size: "", color: "" });
+  const [active, setActive] = useState(EditItems)
 
   configOptions.forEach((item) => {
     if (item.label === "Color") {

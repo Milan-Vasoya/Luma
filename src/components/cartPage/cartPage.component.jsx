@@ -3,20 +3,27 @@ import fetchData from "../fetchData/withAdminToken/fetchdata";
 import { colorsAttribute } from "../../attributes/Colors/Colors.attributes";
 import { sizesAttribute } from "../../attributes/Sizes/Sizes.attributes";
 import "./cartPage.styles.scss";
-import DeleteData from "../deleteData/WithCustomerToken/deleteData";
 import { deleteItemFromCartStart } from "../../redux/cart/cart.action";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
+let color = null;
+let size = null;
 const CartPage = ({
   cartItem: { item_id, sku, name, price, qty, product_type, product_option },
 }) => {
   const [image, setImage] = useState("");
 
+  const history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
     fetchData(
       `https://m241full.digitsoftsol.co/index.php/rest/V1/products/${sku}?fields=media_gallery_entries[file]`
     ).then((data) => setImage(data.media_gallery_entries[0].file));
+
+    return () => {
+      setImage("");
+    };
   }, []);
 
   let configOptions = null;
@@ -109,9 +116,22 @@ const CartPage = ({
           <div className="icon-container">
             <span
               className="icons"
-              onClick={() =>
-                alert(product_type === "configurable" ? sku.split("-")[0] : sku)
-              }
+              onClick={() => {
+                if (product_type === "configurable") {
+                  const splitSKU = sku.split("-");
+                 return history.push(`/product/${splitSKU[0]}`, {
+                    qty: qty,
+                    size: splitSKU[1],
+                    color: splitSKU[2],
+                    id:item_id
+                  });
+                } else {
+                 return history.push(`/product/${sku}`, {
+                    qty: qty,
+                    id:item_id
+                  });
+                }
+              }}
             >
               <i className="fa fa-pencil" aria-hidden="true"></i>
             </span>
