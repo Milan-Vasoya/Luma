@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { ReactComponent as ShoppingBag } from "../../../assests/shopping-bag.svg";
 import "./cartIcon.styles.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleHidden, setCartItemsStart } from "../../../redux/cart/cart.action";
+import {
+  toggleHidden,
+  setCartItemsStart,
+} from "../../../redux/cart/cart.action";
 import { selectCustomerToken } from "../../../redux/customer/customer.selector";
 
 const CartIcon = () => {
@@ -10,7 +13,7 @@ const CartIcon = () => {
   const customerToken = useSelector(selectCustomerToken);
 
   useEffect(() => {
-    const setCartItems = () => dispatch(setCartItemsStart())
+    const setCartItems = () => dispatch(setCartItemsStart());
 
     if (customerToken) {
       setCartItems();

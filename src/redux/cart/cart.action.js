@@ -40,8 +40,6 @@ export const updateItemIncartSuccess= (cartItem,id)=>({
 
 
 
-
-
 export const clearCartItems= ()=>({
     type:cartActionType.CLEAR_CART_ITEMS
 });
@@ -55,4 +53,13 @@ export const deleteItemFromCartStart = (id, url)=>({
     type: cartActionType.DELETE_ITEM_FROM_CART_START,
     id,
     url
+});
+
+export const setQuoteId= (id)=>({
+    type:cartActionType.SET_QUOTE_ID,
+    id
+});
+
+export const clearQuoteId= ()=>({
+    type:cartActionType.CLEAR_QUOTE_ID,
 });

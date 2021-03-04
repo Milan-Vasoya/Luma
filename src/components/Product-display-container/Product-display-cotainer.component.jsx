@@ -8,7 +8,8 @@ import {
   addItemToCartStart,
   updateItemIncartStart,
 } from "../../redux/cart/cart.action";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectQuoteId } from "../../redux/cart/cart.selector";
 
 export const imageContext = createContext({
   setImg: () => {},
@@ -24,19 +25,24 @@ const ProductDisplayContainer = ({
 
   const [img, setImg] = useState("");
 
-  const data = {
-    sku: sku,
-    qty: 1,
-    name: name,
-    price: price,
-    product_type: type_id,
-    quote_id: 11,
-    product_option: {
-      extension_attributes: {
-        configurable_item_options: [],
+  const QutoeId = useSelector(selectQuoteId);
+
+  let data = { qty: 1 };
+  if (QutoeId) {
+    data = {
+      sku: sku,
+      qty: 1,
+      name: name,
+      price: price,
+      product_type: type_id,
+      quote_id: QutoeId,
+      product_option: {
+        extension_attributes: {
+          configurable_item_options: [],
+        },
       },
-    },
-  };
+    };
+  }
 
   const [itemData, setItemData] = useState(data);
 

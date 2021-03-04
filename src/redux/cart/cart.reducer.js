@@ -1,8 +1,9 @@
 import cartActionType from "./cart.type";
-import { deleteCartItem,updateCartItem } from "./cart.utils";
+import { deleteCartItem, updateCartItem } from "./cart.utils";
 const INITIAL_STATE = {
   hidden: true,
   items: [],
+  quoteId: "",
 };
 
 const CartReducer = (state = INITIAL_STATE, action) => {
@@ -17,11 +18,11 @@ const CartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         items: action.items,
       };
-      case cartActionType.ADD_ITEM_TO_CART_SUCCESS:
-        return{
-          ...state,
-          items:[...state.items,action.cartItem]
-        }
+    case cartActionType.ADD_ITEM_TO_CART_SUCCESS:
+      return {
+        ...state,
+        items: [...state.items, action.cartItem],
+      };
     case cartActionType.CLEAR_CART_ITEMS:
       return {
         ...state,
@@ -33,10 +34,20 @@ const CartReducer = (state = INITIAL_STATE, action) => {
         items: deleteCartItem(state.items, action.id),
       };
     case cartActionType.UPDATE_ITEM_IN_CART_SUCCESS:
-      return{
+      return {
         ...state,
-        items:updateCartItem(state.items,action.cartItem ,action.id)
-      }
+        items: updateCartItem(state.items, action.cartItem, action.id),
+      };
+    case cartActionType.SET_QUOTE_ID:
+      return {
+        ...state,
+        quoteId: action.id,
+      };
+    case cartActionType.CLEAR_QUOTE_ID:
+      return {
+        ...state,
+        quoteId: "",
+      };
     default:
       return state;
   }

@@ -12,3 +12,9 @@ export const selectCartItems = createSelector(
     [selectCart],
     cart=>cart.items
     );
+
+        
+export const selectQuoteId = createSelector(
+    [selectCart],
+    cart=>cart.quoteId
+    );

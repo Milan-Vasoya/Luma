@@ -5,10 +5,10 @@ import {
   setCartItemSuccess,
   deleteItemFromCartSuccess,
   addItemTocartSuccess,
-  updateItemIncartSuccess
+  updateItemIncartSuccess,
+  setQuoteId,
 } from "../cart/cart.action";
 import { signOutstart } from "../customer/customer.action";
-
 
 export function* updateDataWithCustToken(url, data) {
   const CustomerToken = yield select(selectCustomerToken);
@@ -39,7 +39,7 @@ export function* deleteDataCartItem(url) {
       Authorization: `Bearer ${CustomerToken}`,
     },
   });
-// yield console.log(res)
+  // yield console.log(res)
   if (res.status === 200) {
     return res.json();
   } else {
@@ -88,14 +88,13 @@ export function* fecthCustomerData(url) {
 }
 
 export function* deletItemFromCart({ id, url }) {
-  
   try {
     const response = yield deleteDataCartItem(url);
-    yield('response',response)
+    yield ("response", response);
     const deletedItem = yield response;
-    yield console.log('deletedItem',deletedItem)
+    yield console.log("deletedItem", deletedItem);
     if (deletedItem === true) {
-     yield put(deleteItemFromCartSuccess(id));
+      yield put(deleteItemFromCartSuccess(id));
     }
   } catch (e) {
     yield console.log("[cartSaga] error", e);
@@ -124,21 +123,19 @@ export function* onAddItemToCartStart() {
   yield takeLatest(cartActionType.ADD_ITEM_TO_CART_START, addItemTocart);
 }
 
-
-
-export function* updateItemIncart({ url, itemInfo,id }) {
+export function* updateItemIncart({ url, itemInfo, id }) {
   try {
     const cartItem = yield updateDataWithCustToken(url, itemInfo);
     const itemToUpdate = yield cartItem;
-    console.log('update Item',itemToUpdate)
-    yield put(updateItemIncartSuccess(itemToUpdate,id));
+    console.log("update Item", itemToUpdate);
+    yield put(updateItemIncartSuccess(itemToUpdate, id));
   } catch (e) {
     yield console.log("[cartSaga] error", e);
   }
 }
 
 export function* onUpdateItemInCartStart() {
-  yield takeLatest(cartActionType.UPDATE_ITEM_IN_CART_START,updateItemIncart );
+  yield takeLatest(cartActionType.UPDATE_ITEM_IN_CART_START, updateItemIncart);
 }
 
 export function* SetCartItems() {
@@ -150,8 +147,21 @@ export function* SetCartItems() {
 
     yield put(setCartItemSuccess(Itemdata));
   } catch (e) {
-    yield console.log("[cartSaga] error", e);
-    yield put(signOutstart());
+    yield console.log(
+      e.message.includes("Current customer does not have an active cart"),
+      "[cartSaga] error",
+      e.message
+    );
+
+    if (!e.message.includes("Current customer does not have an active cart")) {
+      yield put(signOutstart());
+    }
+  } finally {
+    const response = yield fecthCustomerData(
+      `https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/?fields=id`
+    );
+    const quoteId = yield response;
+    yield put(setQuoteId(quoteId.id));
   }
 }
 
@@ -164,6 +174,6 @@ export default function* CustomerSaga() {
     call(onSetCartItemsStart),
     call(onAddItemToCartStart),
     call(onDeleteItemFromCartStart),
-    call(onUpdateItemInCartStart)
+    call(onUpdateItemInCartStart),
   ]);
 }

@@ -12,13 +12,17 @@ export const signOutstart = () => ({
   type: customerActionType.SIGN_OUT_START,
 });
 
-export const signUpstart = (username, password) => ({
+export const signUpstart = (data) => ({
   type: customerActionType.SIGN_UP_START,
-  username,
-  password,
+  data
 });
 
-export const signInStart = (token) => ({
+export const signInStart = (custData) => ({
   type: customerActionType.SIGN_IN_START,
-  token,
+  custData,
+});
+
+export const setError = (error) => ({
+  type: customerActionType.SET_ERROR,
+  error,
 });

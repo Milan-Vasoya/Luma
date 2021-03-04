@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./signIn.styles.scss";
 import FormInput from "../../Custom-Component/Form-input/form-input.component";
 import CustomButton from "../../Custom-Component/button/custom-button.component";
-import { useDispatch } from "react-redux";
-import TokenGenrator from "../tokenGenrator/tokenGenrator";
+import { useDispatch, useSelector } from "react-redux";
+import { signInStart } from "../../../redux/customer/customer.action";
+import { selectCustError } from "../../../redux/customer/customer.selector";
 
 const SignIn = ({ loading }) => {
   const dispatch = useDispatch();
+
+  const custError = useSelector(selectCustError);
 
   const [userCredential, setUserCredential] = useState({
     email: "",
@@ -15,6 +18,16 @@ const SignIn = ({ loading }) => {
   });
 
   const { email, password, error } = userCredential;
+
+  useEffect(() => {
+    if(custError){
+      loading(false);
+      setUserCredential({...userCredential,error:custError.split('.')[0]})
+    }
+   
+    
+  }, [custError]);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,10 +38,7 @@ const SignIn = ({ loading }) => {
       password,
     };
 
-    TokenGenrator(data, dispatch).catch((error) => {
-      loading(false);
-      setUserCredential({ ...userCredential, error });
-    });
+    dispatch(signInStart(data))
   };
 
   const inputChangeHandler = (e) => {

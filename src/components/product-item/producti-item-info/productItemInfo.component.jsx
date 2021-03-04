@@ -1,9 +1,11 @@
 import React, { useEffect, useState, createContext } from "react";
 import "./productItemInfo.styles.scss";
 import fetchdata from "../../fetchData/withAdminToken/fetchdata";
-import { Redirect, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import ConfigurableProduct from "../../configurableProduct/configurable.product";
 import validate from "../../validate/prod-add-on-display";
+import {  selectQuoteId} from "../../../redux/cart/cart.selector";
+import { useSelector } from "react-redux";
 
 
 const ImagePath = "https://m241full.digitsoftsol.co/pub/media/catalog/product";
@@ -16,6 +18,7 @@ const ProductItemInfo = ({ sku }) => {
   const history = useHistory();
   const [product, setProduct] = useState({});
   const [config,setConfig]= useState([]);
+  const QuoteId =useSelector(selectQuoteId);
 
   useEffect(() => {
     fetchdata(
@@ -39,7 +42,7 @@ const ProductItemInfo = ({ sku }) => {
       name: product.name,
       price: product.price,
       product_type: product.type_id,
-      quote_id: 11,
+      quote_id: QuoteId,
       product_option: {
         extension_attributes: {
           configurable_item_options: config,
