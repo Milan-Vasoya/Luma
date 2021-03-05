@@ -4,16 +4,17 @@ import { colorsAttribute } from "../../attributes/Colors/Colors.attributes";
 import { sizesAttribute } from "../../attributes/Sizes/Sizes.attributes";
 import "./cartPage.styles.scss";
 import { deleteItemFromCartStart } from "../../redux/cart/cart.action";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { selectCustomerToken } from "../../redux/customer/customer.selector";
+import { deleteGuestItemFromCart } from "../../redux/guest/guest.action";
 
-let color = null;
-let size = null;
 const CartPage = ({
   cartItem: { item_id, sku, name, price, qty, product_type, product_option },
 }) => {
   const [image, setImage] = useState("");
 
+  const CustomerToken = useSelector(selectCustomerToken);
   const history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -33,14 +34,19 @@ const CartPage = ({
   }
 
   const DeleteItem = (id) => {
-    dispatch(
-      deleteItemFromCartStart(
-        id,
-        `https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items/${id}`
-      )
-    );
-  };
+ if(CustomerToken){
+  dispatch(
+    deleteItemFromCartStart(
+      id,
+      `https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items/${id}`
+    )
+  );
+}
+else{
+  dispatch(deleteGuestItemFromCart(id))
+}
 
+ }
   return (
     <tbody>
       <tr className="row">

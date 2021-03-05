@@ -10,6 +10,11 @@ import {
 } from "../../redux/cart/cart.action";
 import { useDispatch, useSelector } from "react-redux";
 import { selectQuoteId } from "../../redux/cart/cart.selector";
+import { selectCustomerToken } from "../../redux/customer/customer.selector";
+import {
+  addGuestCartItemsstart,
+  updateGuestcartItemsstart,
+} from "../../redux/guest/guest.action";
 
 export const imageContext = createContext({
   setImg: () => {},
@@ -26,29 +31,31 @@ const ProductDisplayContainer = ({
   const [img, setImg] = useState("");
 
   const QutoeId = useSelector(selectQuoteId);
+  const CustomerToken = useSelector(selectCustomerToken);
 
-  let data = { qty: 1 };
-  if (QutoeId) {
-    data = {
-      sku: sku,
-      qty: 1,
-      name: name,
-      price: price,
-      product_type: type_id,
-      quote_id: QutoeId,
-      product_option: {
-        extension_attributes: {
-          configurable_item_options: [],
-        },
+  const data = {
+    sku: sku,
+    qty: 1,
+    name: name,
+    price: price,
+    product_type: type_id,
+    quote_id: QutoeId,
+    product_option: {
+      extension_attributes: {
+        configurable_item_options: [],
       },
-    };
-  }
+    },
+  };
 
   const [itemData, setItemData] = useState(data);
 
   useEffect(() => {
+    setItemData({ ...itemData, quote_id: QutoeId });
+  }, [QutoeId]);
+
+  useEffect(() => {
     if (EditItems) {
-      setItemData({ ...data, qty: EditItems.qty });
+      setItemData({ ...itemData, qty: EditItems.qty });
     }
   }, [EditItems]);
 
@@ -69,13 +76,16 @@ const ProductDisplayContainer = ({
         ...data,
       },
     };
-
-    dispatch(
-      addItemToCartStart(
-        "https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items",
-        newData
-      )
-    );
+    if (CustomerToken) {
+      dispatch(
+        addItemToCartStart(
+          "https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items",
+          newData
+        )
+      );
+    } else {
+      dispatch(addGuestCartItemsstart(newData));
+    }
   };
 
   const onUpdateItem = (data) => {
@@ -85,13 +95,17 @@ const ProductDisplayContainer = ({
         ...data,
       },
     };
-    dispatch(
-      updateItemIncartStart(
-        `https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items/${EditItems.id}`,
-        newData,
-        EditItems.id
-      )
-    );
+    if (CustomerToken) {
+      dispatch(
+        updateItemIncartStart(
+          `https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items/${EditItems.id}`,
+          newData,
+          EditItems.id
+        )
+      );
+    } else {
+      dispatch(updateGuestcartItemsstart(newData, EditItems.id));
+    }
   };
 
   //console.log(itemData);

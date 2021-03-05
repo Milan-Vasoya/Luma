@@ -7,10 +7,14 @@ import {
   setCartItemsStart,
 } from "../../../redux/cart/cart.action";
 import { selectCustomerToken } from "../../../redux/customer/customer.selector";
+import { selectCartId } from "../../../redux/guest/guest.selector";
+import {  setGuestCartItemsStart} from "../../../redux/guest/guest.action";
+
 
 const CartIcon = () => {
   const dispatch = useDispatch();
   const customerToken = useSelector(selectCustomerToken);
+  const cartId = useSelector(selectCartId);
 
   useEffect(() => {
     const setCartItems = () => dispatch(setCartItemsStart());
@@ -19,6 +23,12 @@ const CartIcon = () => {
       setCartItems();
     }
   }, [customerToken]);
+
+  useEffect(() => {
+    if (cartId && (!customerToken)) {
+      dispatch(setGuestCartItemsStart())
+    }
+  }, [cartId]);
 
   return (
     <div className="cart-icon" onClick={() => dispatch(toggleHidden())}>
