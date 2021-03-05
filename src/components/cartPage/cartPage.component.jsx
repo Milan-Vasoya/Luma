@@ -25,7 +25,7 @@ const CartPage = ({
     return () => {
       setImage("");
     };
-  }, []);
+  }, [sku]);
 
   let configOptions = null;
   if (product_type === "configurable") {
@@ -34,19 +34,17 @@ const CartPage = ({
   }
 
   const DeleteItem = (id) => {
- if(CustomerToken){
-  dispatch(
-    deleteItemFromCartStart(
-      id,
-      `https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items/${id}`
-    )
-  );
-}
-else{
-  dispatch(deleteGuestItemFromCart(id))
-}
-
- }
+    if (CustomerToken) {
+      dispatch(
+        deleteItemFromCartStart(
+          id,
+          `https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/items/${id}`
+        )
+      );
+    } else {
+      dispatch(deleteGuestItemFromCart(id));
+    }
+  };
   return (
     <tbody>
       <tr className="row">
@@ -125,16 +123,16 @@ else{
               onClick={() => {
                 if (product_type === "configurable") {
                   const splitSKU = sku.split("-");
-                 return history.push(`/product/${splitSKU[0]}`, {
+                  return history.push(`/product/${splitSKU[0]}`, {
                     qty: qty,
                     size: splitSKU[1],
                     color: splitSKU[2],
-                    id:item_id
+                    id: item_id,
                   });
                 } else {
-                 return history.push(`/product/${sku}`, {
+                  return history.push(`/product/${sku}`, {
                     qty: qty,
-                    id:item_id
+                    id: item_id,
                   });
                 }
               }}

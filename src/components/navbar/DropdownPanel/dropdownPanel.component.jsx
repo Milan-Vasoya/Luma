@@ -1,4 +1,3 @@
-import { greenBright } from "ansi-styles";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./dropdownPanel.component.scss";

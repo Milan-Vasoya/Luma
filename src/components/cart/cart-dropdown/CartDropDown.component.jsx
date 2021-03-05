@@ -5,14 +5,14 @@ import CartItem from "../cartItem/cartItem.component";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleHidden } from "../../../redux/cart/cart.action";
 import { useHistory } from "react-router-dom";
-import { selectCartItems } from "../../../redux/cart/cart.selector";
-
+import { selectCartItems, selectCartItemsCount } from "../../../redux/cart/cart.selector";
 
 const CartDropDown = () => {
   const dispatch = useDispatch();
-  const history = useHistory(); 
-
+  const history = useHistory();
+const itemCount = useSelector(selectCartItemsCount);
   const cartItems = useSelector(selectCartItems);
+
 
   return (
     <div className="cart-dropdown ">
@@ -23,13 +23,17 @@ const CartDropDown = () => {
         X
       </span>
       <div className="cart-items">
-        {cartItems.map((cartItem) => (
-          <CartItem key={cartItem.item_id} cartItem={cartItem} />
-        ))}
+        {itemCount>0? cartItems.map((cartItem,index) => (
+          <CartItem key={index} cartItem={cartItem} />
+        )):
+      <span className='empty-cart'>
+      Nothing In the Cart
+      </span>
+      
+      }
       </div>
       <div className="button-container">
         <CustomButton
-          onClickHandle={() => alert("checkout added")}
           className="custom-button"
           onClickHandle={() => {
             history.push("/cart");

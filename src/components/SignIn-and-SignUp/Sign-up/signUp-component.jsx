@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import FormInput from "../../Custom-Component/Form-input/form-input.component";
 import "./signUp.styles.scss";
 import CustomButtom from "../../Custom-Component/button/custom-button.component";
-import postData from "../../postData/Simple/postdata";
-import TokenGenrator from "../tokenGenrator/tokenGenrator";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpstart } from "../../../redux/customer/customer.action";
 import { selectCustError } from "../../../redux/customer/customer.selector";
 
-const url = "https://m241full.digitsoftsol.co/index.php/rest/V1/customers";
+
 
 const SignUp = ({ loading }) => {
   const dispatch = useDispatch();

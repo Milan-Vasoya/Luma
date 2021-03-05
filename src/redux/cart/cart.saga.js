@@ -1,4 +1,4 @@
-import { takeLatest, put, all, call, select, retry } from "redux-saga/effects";
+import { takeLatest, put, all, call, select } from "redux-saga/effects";
 import cartActionType from "./cart.type";
 import { selectCustomerToken } from "../customer/customer.selector";
 import {

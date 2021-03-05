@@ -12,7 +12,7 @@ const TypesOfRelated = ({ sku }) => {
     ).then((data) => setProduct(data));
 
     return ()=>setProduct(null)
-  }, []);
+  }, [sku]);
   
   return (
     <div className="rel-prod" onClick={()=>history.push(`/product/${product.sku}`)} >

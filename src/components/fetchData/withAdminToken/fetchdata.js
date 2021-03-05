@@ -1,5 +1,5 @@
 
-const adminToken = "arzat39plxoysleqaq9ex1myc6j4rd4a";
+const adminToken = "j3db9e7mm76gaj53et91uw7gyi1h282q";
 
 const fetchdata = (url) => {
   return fetch(url, {

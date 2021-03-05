@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {  useState } from "react";
 import "./product-tab.styles.scss";
 import HtmlParser from "html-react-parser";
 import materialAttributes from "../../attributes/materials/materials.attributes";
@@ -19,6 +19,8 @@ const ProductTab = ({ customAttributes }) => {
         case "material":
           const abc = item.value.split(",");
           return (materials = abc.map((item) => materialAttributes[item]));
+        default :
+        return item  
       }
     });
   }

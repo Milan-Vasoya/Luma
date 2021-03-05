@@ -19,6 +19,8 @@ const RealtedProducts = ({ prodLinks }) => {
         case "upsell": {
           return upsell.push(item.linked_product_sku);
         }
+        default :
+        return item;
       }
     });
     changeState(!state);

@@ -44,8 +44,6 @@ const ConfigurableProduct = ({
     setVariation({ color: colors[0], size: sizes[0] });
 
     return () => {
-      sizes = null;
-      colors = null;
     };
   }, []);
 

@@ -1,7 +1,7 @@
 const Validate = (data = {}) => {
   if (data.qty > 0) {
 
-    if (data.product_type == "configurable") {
+    if (data.product_type === "configurable") {
       if (
         data.product_option.extension_attributes.configurable_item_options.length > 0
       ) {
