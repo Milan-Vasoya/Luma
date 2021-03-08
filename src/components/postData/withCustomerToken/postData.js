@@ -1,4 +1,4 @@
-const CustomerToken = "w870m6bmxicfvx4flfou0q3udwnbydpf";
+const CustomerToken = "65optrawfpd1rbxf0f5j4i6dwzp7wjho";
 const postdata = (url, data) => {
     return fetch(url, {
       method: "POST",

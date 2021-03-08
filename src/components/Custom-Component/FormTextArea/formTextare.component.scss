@@ -11,7 +11,7 @@ $main-color: black;
   position: relative;
   margin: 45px 0;
 
-  .form-input {
+  .form-area {
     background: none;
     background-color: white;
     color: $sub-color;
@@ -21,24 +21,26 @@ $main-color: black;
     width: 100%;
     border: none;
     border-radius: 0;
-    border-bottom: 1px solid $sub-color;
+    border: 1px solid $sub-color;
     margin: 25px 0;
 
     &:focus {
       outline: none;
     }
 
-    &:focus ~ .form-input-label {
+    &:focus ~ .form-area-label {
       @include shrinkLabel();
     }
+
+    
   }
 
-  input[type='password'] {
+  area[type='password'] {
     letter-spacing: 0.3em;
     
   }
 
-  .form-input-label {
+  .form-area-label {
     color: $sub-color;
     font-size: 16px;
     font-weight: normal;

@@ -40,7 +40,7 @@ const itemCount = useSelector(selectCartItemsCount);
             dispatch(toggleHidden());
           }}
         >
-          GO To CHECKOUT
+          GO TO CART
         </CustomButton>
       </div>
     </div>

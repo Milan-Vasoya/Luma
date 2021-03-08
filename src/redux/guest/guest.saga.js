@@ -3,7 +3,8 @@ import {
   addItemTocartSuccess,
   deleteItemFromCartSuccess,
   updateItemIncartSuccess,
-  setCartItemSuccess
+  setCartItemSuccess,
+  setTotalsSuccess,
 } from "../cart/cart.action";
 import { setCartId } from "./guest.action";
 import { selectCartId } from "./guest.selector";
@@ -166,7 +167,7 @@ export function* setGuestcartItems() {
       `https://m241full.digitsoftsol.co/index.php/rest/all/V1/guest-carts/${cartId}/items`
     );
 
-    const GuestItems = yield response
+    const GuestItems = yield response;
     yield put(setCartItemSuccess(GuestItems));
   }
 }
@@ -178,11 +179,31 @@ export function* onSetGuestCartItems() {
   );
 }
 
+export function* setGuestTotals() {
+  const cartId = yield select(selectCartId);
+  try {
+    const response = yield simpleFetchdata(
+      `https://m241full.digitsoftsol.co/index.php/rest/default/V1/guest-carts/${cartId}/payment-information?fields=totals[grand_total,subtotal]`
+    );
+    const { totals } = yield response;
+    yield console.log("totals", totals);
+
+    yield put(setTotalsSuccess(totals));
+  } catch (e) {
+    yield console.log("[GuestSaga] error", e.message);
+  }
+}
+
+export function* onSetGuestTotalsStart() {
+  yield takeLatest(guestActionType.SET_GUEST_TOTLAS_START, setGuestTotals);
+}
+
 export default function* GuestSaga() {
   yield all([
     call(onGuestAddCartItem),
     call(onGuestDeleteItemFromCart),
     call(onGuestupdateItemToCart),
     call(onSetGuestCartItems),
+    call(onSetGuestTotalsStart),
   ]);
 }

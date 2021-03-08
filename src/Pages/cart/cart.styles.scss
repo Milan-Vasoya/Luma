@@ -1,23 +1,39 @@
 .cart-container {
-    display        : flex;
-    width          : 100%;
-    justify-content: center;
-    margin-top     : 50px;
+    display: flex;
+    width  : 100%;
+
+    flex-direction: column;
+    margin-top    : 50px;
+    align-items   : center;
 
     .sub-container {
+        width          : 80%;
+        display        : flex;
+        flex-direction : row-reverse;
+        justify-content: space-between;
+    }
+
+    .ca-header {
         width: 80%;
+
+        .sh-header {
+            font-size  : 40px;
+            font-weight: 300;
+            color      : #666;
+        }
     }
 }
 
 .cart {
-    width: 75%;
+    width: 73%;
 }
+
 
 .cart-table {
     border-collapse: collapse;
     border-spacing : 0;
     width          : 100%;
-    
+
     .table-header {
         font-size    : 14px;
         border-bottom: 1px solid #666;
@@ -28,5 +44,10 @@
         }
     }
 
-  
+
+}
+
+.ca-summary-container {
+    width: 23%;
+   
 }

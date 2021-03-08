@@ -1,9 +1,10 @@
 import cartActionType from "./cart.type";
-import { deleteCartItem, updateCartItem } from "./cart.utils";
+import { deleteCartItem, updateCartItem,addCartitem } from "./cart.utils";
 const INITIAL_STATE = {
   hidden: true,
   items: [],
   quoteId: "",
+  totals:{}
 };
 
 const CartReducer = (state = INITIAL_STATE, action) => {
@@ -21,7 +22,7 @@ const CartReducer = (state = INITIAL_STATE, action) => {
     case cartActionType.ADD_ITEM_TO_CART_SUCCESS:
       return {
         ...state,
-        items: [...state.items, action.cartItem],
+        items: addCartitem(state.items, action.cartItem),
       };
     case cartActionType.CLEAR_CART_ITEMS:
       return {
@@ -48,6 +49,11 @@ const CartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         quoteId: "",
       };
+      case cartActionType.SET_TOTALS_SUCCESS:
+        return{
+        ...state,
+        totals:action.totals
+        }
     default:
       return state;
   }

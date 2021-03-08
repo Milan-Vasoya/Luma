@@ -63,3 +63,12 @@ export const setQuoteId= (id)=>({
 export const clearQuoteId= ()=>({
     type:cartActionType.CLEAR_QUOTE_ID,
 });
+
+export const setTotalsSuccess = (totals) =>({
+type:cartActionType.SET_TOTALS_SUCCESS,
+totals
+})
+
+export const setTotalsStart =()=>({
+    type:cartActionType.SET_TOTALS_START
+})

@@ -24,6 +24,7 @@ import { store } from "./redux/store";
 import demo from "./components/trash/demo.component";
 import { selectCustomerToken } from "./redux/customer/customer.selector";
 import { useSelector } from "react-redux";
+import Checkout from "./Pages/checkout/checkout.page";
 
 
 
@@ -53,6 +54,7 @@ const App = () => {
           )}
         />
         <Route path="/prodDisplay" component={ProductDisplay} />
+        <Route path="/checkout" component={Checkout} />
         <Route path="/product" component={product} />
         <Route path="/catPage" component={CatPage} />
         <Route path="/cart" component={cartPage} />
@@ -61,6 +63,7 @@ const App = () => {
         <PublicRoute path="/signIn" component={SignInSignUpPage} />
         <Route component={PageNoteFound} />
       </Switch>
+      
     </div>
   );
 };

@@ -14,6 +14,10 @@ export const selectQuoteId = createSelector(
   (cart) => cart.quoteId
 );
 
+export const selectTotals = createSelector(
+  [selectCart],
+  (cart) => cart.totals
+);
 export const selectCartItemsCount = createSelector(
   [selectCartItems],
   (cartItems) =>
@@ -24,12 +28,12 @@ export const selectCartItemsCount = createSelector(
 );
 
 
-export const selectCartTotal=createSelector(
-  [selectCartItems],
-  (cartItems) =>
-    cartItems.reduce(
-      (accumalatedQuantity, cartItem) =>
-        accumalatedQuantity + cartItem.qty*cartItem.price,
-      0
-    )
-);
+// export const selectCartTotal=createSelector(
+//   [selectCartItems],
+//   (cartItems) =>
+//     cartItems.reduce(
+//       (accumalatedQuantity, cartItem) =>
+//         accumalatedQuantity + cartItem.qty*cartItem.price,
+//       0
+//     )
+// );

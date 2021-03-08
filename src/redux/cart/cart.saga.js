@@ -7,6 +7,7 @@ import {
   addItemTocartSuccess,
   updateItemIncartSuccess,
   setQuoteId,
+  setTotalsSuccess,
 } from "../cart/cart.action";
 import { signOutstart } from "../customer/customer.action";
 
@@ -169,11 +170,29 @@ export function* onSetCartItemsStart() {
   yield takeLatest(cartActionType.SET_CART_ITEMS_START, SetCartItems);
 }
 
+
+export function* setTotals(){
+try{
+  const response= yield fecthCustomerData(`https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/payment-information?fields=totals[grand_total,subtotal]`)
+  const {totals} = yield response
+  yield console.log("totals",totals)
+  yield put(setTotalsSuccess(totals))
+} catch (e) {
+  yield console.log("[cartSaga] error", e.message);
+}
+}
+
+export function* onSetTotalsStart() {
+  yield takeLatest(cartActionType.SET_TOTALS_START, setTotals);
+}
+
+
 export default function* CustomerSaga() {
   yield all([
     call(onSetCartItemsStart),
     call(onAddItemToCartStart),
     call(onDeleteItemFromCartStart),
     call(onUpdateItemInCartStart),
+    call(onSetTotalsStart)
   ]);
 }

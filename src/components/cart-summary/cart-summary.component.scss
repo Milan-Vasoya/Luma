@@ -1,0 +1,99 @@
+.summary-container {
+    background-color: #f5f5f5;
+    font-size       : 14px;
+    border-radius   : 5px;
+    position        : sticky;
+    top             : 10px;
+
+
+    .space-btn {
+        display        : flex;
+        justify-content: space-between;
+    }
+
+    .ca-summary {
+
+        margin: 0 10px;
+
+
+        .ca-container-header {
+            border-bottom: 1px solid #666;
+            padding      : 12px 0;
+
+            strong {
+                font-size  : 24px;
+                padding    : 10px 0;
+                font-weight: 400;
+            }
+        }
+
+        .ca-container-tax {
+            padding      : 10px 0;
+            border-bottom: 1px solid #666;
+          
+            .ca-shopping-tax {
+                @extend .space-btn;
+                font-weight: 600;
+                cursor: pointer;
+
+            }
+
+            .eastimated-tax {
+                margin: 10px 0;
+
+                .summary-form {
+                    display       : flex;
+                    flex-direction: column;
+
+                    .selective {
+                        height : 30px;
+                        padding: 0 5px;
+                    }
+
+                    label {
+                        font-weight: 600;
+                        padding    : 10px 0;
+                    }
+                }
+
+                .shipping-method {
+                    dt {
+                        font-weight: 600;
+                        margin     : 7px 0;
+                    }
+
+                    dd {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+
+        .ca-calc {
+            border-bottom: 1px solid #666;
+
+
+            .ca-count {
+                @extend .space-btn;
+                margin: 10px 0;
+            }
+        }
+
+        .ca-total-order {
+            @extend .space-btn;
+            margin     : 10px 0;
+            font-size  : 18px;
+            font-weight: 600;
+        }
+
+        .ca-btn-con {
+            display        : flex;
+            justify-content: center;
+            padding        : 15px 0;
+
+            button {
+                border-radius: 5px;
+            }
+        }
+    }
+}

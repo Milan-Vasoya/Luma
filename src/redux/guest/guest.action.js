@@ -38,3 +38,7 @@ export const updateGuestcartItemsstart = (cartItem,id) =>({
   cartItem,
   id
 });
+
+export const setGuestTotalsStart =()=>({
+  type:guestActionType.SET_GUEST_TOTLAS_START
+})
