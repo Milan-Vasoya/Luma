@@ -4,9 +4,9 @@ import CustomButton from "../Custom-Component/button/custom-button.component";
 import { useSelector } from "react-redux";
 import { selectCustomerToken } from "../../redux/customer/customer.selector";
 import { selectCartId } from "../../redux/guest/guest.selector";
-import { selectTotals } from "../../redux/cart/cart.selector";
-import {GetCountries,GetRegion} from '../FetechAPIS/Country/country'
-
+import { selectCartItems, selectTotals } from "../../redux/cart/cart.selector";
+import { GetCountries, GetRegion } from "../FetechAPIS/Country/country";
+import { useHistory } from "react-router";
 
 const CartSummary = () => {
   const [estTax, setEstTax] = useState(false);
@@ -18,20 +18,21 @@ const CartSummary = () => {
 
   const CustomerToken = useSelector(selectCustomerToken);
   const cartId = useSelector(selectCartId);
-const totals = useSelector(selectTotals);
+  const totals = useSelector(selectTotals);
+  const CartItems = useSelector(selectCartItems);
+  const history = useHistory();
 
   useEffect(() => {
-    GetCountries()
-      .then((data) => CountriesSetter(data));
+    GetCountries().then((data) => CountriesSetter(data));
+  return ()=>setCountries(null)
   }, []);
 
   const getCoutryById = (id) => {
-    GetRegion(id)
-      .then((data) =>
-        data.available_regions
-          ? setAvilRegion(data.available_regions)
-          : setRegion(null)
-      );
+    GetRegion(id).then((data) =>
+      data.available_regions
+        ? setAvilRegion(data.available_regions)
+        : setRegion(null)
+    );
   };
 
   const getEstamitedShipping = (region, name) => {
@@ -53,6 +54,7 @@ const totals = useSelector(selectTotals);
         };
 
     if (CustomerToken) {
+      
       fetch(
         `https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/estimate-shipping-methods`,
         {
@@ -66,7 +68,9 @@ const totals = useSelector(selectTotals);
       )
         .then((res) => res.json())
         .then((tax) => setEstShipping(tax));
+
     } else {
+
       fetch(
         `https://m241full.digitsoftsol.co/index.php/rest/V1/guest-carts/${cartId}/estimate-shipping-methods?fields=carrier_title,method_code,carrier_code,method_title,amount`,
         {
@@ -80,6 +84,15 @@ const totals = useSelector(selectTotals);
         .then((res) => res.json())
         .then((tax) => setEstShipping(tax));
     }
+
+  };
+
+  const sendToCheckOut = () => {
+    CustomerToken
+      ? CartItems.length > 0
+        ? history.push("/checkout")
+        : alert("please Add Item first")
+      : history.push("/signIn");
   };
 
   return (
@@ -145,8 +158,9 @@ const totals = useSelector(selectTotals);
                       type="text"
                       className="selective"
                       onBlur={(e) =>
-                        e.target.value.length >2?
-                        getEstamitedShipping(undefined, e.target.value):alert('enter state')
+                        e.target.value.length > 2
+                          ? getEstamitedShipping(undefined, e.target.value)
+                          : alert("enter state")
                       }
                     />
                   )}
@@ -159,26 +173,26 @@ const totals = useSelector(selectTotals);
                 </div>
 
                 <div className="shipping-method">
-                <dl>
-                  {estShipping
-                    ? estShipping.map((item, index) => (
-                        <span key={index}>
-                          <dt>{item.carrier_title}</dt>
-                          <dd>
-                            <input
-                              type="radio"
-                              name="abc2"
-                              id={item.method_title}
-                              value={item.amount}
-                            />
-                            <label htmlFor={item.method_title}>
-                              {item.method_title} <b>${item.amount}</b>{" "}
-                            </label>
-                          </dd>
-                        </span>
-                      ))
-                    : null}
-                    </dl>
+                  <dl>
+                    {estShipping
+                      ? estShipping.map((item, index) => (
+                          <span key={index}>
+                            <dt>{item.carrier_title}</dt>
+                            <dd>
+                              <input
+                                type="radio"
+                                name="abc2"
+                                id={item.method_title}
+                                value={item.amount}
+                              />
+                              <label htmlFor={item.method_title}>
+                                {item.method_title} <b>${item.amount}</b>{" "}
+                              </label>
+                            </dd>
+                          </span>
+                        ))
+                      : null}
+                  </dl>
                 </div>
               </form>
             </div>
@@ -195,9 +209,8 @@ const totals = useSelector(selectTotals);
 
           <div className="ca-count">
             <span>Tax</span>
-            
-              <span>$0.00</span>
-            
+
+            <span>$0.00</span>
           </div>
         </div>
 
@@ -214,7 +227,10 @@ const totals = useSelector(selectTotals);
         ) : null}
 
         <div className="ca-btn-con">
-          <CustomButton className="google-sign-in custom-button">
+          <CustomButton
+            className="google-sign-in custom-button"
+            onClickHandle={sendToCheckOut}
+          >
             {" "}
             Proceed to Checkout
           </CustomButton>

@@ -147,6 +147,14 @@ export function* SetCartItems() {
     const Itemdata = yield cartItems;
 
     yield put(setCartItemSuccess(Itemdata));
+
+
+ const response = yield fecthCustomerData(
+      `https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/?fields=id`
+    );
+    const quoteId = yield response;
+    yield put(setQuoteId(quoteId.id));
+
   } catch (e) {
     yield console.log(
       e.message.includes("Current customer does not have an active cart"),
@@ -154,16 +162,18 @@ export function* SetCartItems() {
       e.message
     );
 
-    if (!e.message.includes("Current customer does not have an active cart")) {
+    if (e.message.includes("Current customer does not have an active cart")) {
+    
+      const response = yield postDataWithCustToken(
+        `https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine`
+      );
+      const quoteId = yield response;
+      yield put(setQuoteId(quoteId));
+
+    }else{
       yield put(signOutstart());
     }
-  } finally {
-    const response = yield fecthCustomerData(
-      `https://m241full.digitsoftsol.co/index.php/rest/default/V1/carts/mine/?fields=id`
-    );
-    const quoteId = yield response;
-    yield put(setQuoteId(quoteId.id));
-  }
+  } 
 }
 
 export function* onSetCartItemsStart() {

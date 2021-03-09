@@ -1,0 +1,26 @@
+.ch-form-container {
+    display        : flex;
+    justify-content: center;
+
+    .ch-form {
+        width: 80%;
+
+
+        .shippig-from {
+            .shippng-header {
+                font-size    : 35px;
+                margin       : 15px 0;
+                border-bottom: 2px dashed;
+            }
+
+         
+
+            width: 500px;
+
+            .btn {
+                margin-left: auto;
+            }
+        }
+
+    }
+}

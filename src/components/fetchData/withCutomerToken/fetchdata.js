@@ -1,6 +1,6 @@
-const CustomerToken = "w870m6bmxicfvx4flfou0q3udwnbydpf";
 
-const fetchdata = (url) => {
+
+const fetchdata = (url,CustomerToken) => {
 
   return fetch(url, {
     method: "GET",

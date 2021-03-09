@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useCallback } from "react";
-import "./shipping-address.styles.scss";
+import "./billing-address.styles.scss";
 import FormInput from "../../Custom-Component/Form-input/form-input.component";
 import FormArea from "../../Custom-Component/FormTextArea/formTextArea.component";
 import FormSelect from "../../Custom-Component/formSelect/formSelect.component";
 import CustomButton from "../../Custom-Component/button/custom-button.component";
 import { GetCountries, GetRegion } from "../../FetechAPIS/Country/country";
-import postData from "../../postData/withCustomerToken/postData";
 
-const ShippingForm = ({ addInfoSetter,setIsBillingSame }) => {
+
+const BillingAddress = ({ addInfoSetter }) => {
   const [countries, setCountries] = useState([]);
   const [regions, setRegions] = useState(null);
 
@@ -77,21 +77,13 @@ const ShippingForm = ({ addInfoSetter,setIsBillingSame }) => {
 
   const onFromSubmit = (e) => {
     e.preventDefault();
-    const checkBox = document.getElementById('ch1').checked;
-  
-      
+    addInfoSetter("billing_address",address)
 
-    if(checkBox === true){
-      addInfoSetter("billing_address",address,"shipping_address", address);
-    }else{
-      addInfoSetter("shipping_address", address)
-      setIsBillingSame(false);
-    }
   };
 
   return (
     <div className="shippig-from">
-      <div className="shippng-header">Shipping Address</div>
+      <div className="shippng-header">Add Billing Address</div>
       <form onSubmit={onFromSubmit}>
         <FormInput
           name="email"
@@ -196,13 +188,10 @@ const ShippingForm = ({ addInfoSetter,setIsBillingSame }) => {
           required
           label="Phone Number*"
         />
-        <span className='checkBox'>
-          <input id="ch1" type="checkbox" defaultChecked  />
-          <label htmlFor='ch1'>Billing Address Is Same</label>
-        </span>
+      
         <CustomButton className="custom-button btn">Next</CustomButton>
       </form>
     </div>
   );
 };
-export default ShippingForm;
+export default BillingAddress;

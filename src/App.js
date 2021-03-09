@@ -25,7 +25,7 @@ import demo from "./components/trash/demo.component";
 import { selectCustomerToken } from "./redux/customer/customer.selector";
 import { useSelector } from "react-redux";
 import Checkout from "./Pages/checkout/checkout.page";
-
+import PaymentSummary from './components/payment-summary/summmary.payment';
 
 
 //set Token
@@ -59,6 +59,7 @@ const App = () => {
         <Route path="/catPage" component={CatPage} />
         <Route path="/cart" component={cartPage} />
         <Route path="/demo" component={demo}  />
+        <Route path="/paySum" component={PaymentSummary} />
 
         <PublicRoute path="/signIn" component={SignInSignUpPage} />
         <Route component={PageNoteFound} />

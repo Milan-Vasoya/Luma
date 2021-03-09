@@ -1,0 +1,61 @@
+.row {
+
+border-bottom: 1px solid;
+    td {
+        vertical-align: top;
+        padding: 25px 10px;
+    }
+}
+
+
+.sum-item-continer {
+    display  : flex;
+    font-size: 14px;
+
+    .item-name {
+        font-size: 18px;
+        margin   : 5px 0 20px 0;
+       
+    }
+
+    .cart-img-container {
+        min-width : 170px;
+        min-height: 180px;
+
+        .cart-img {
+            max-width   : 170px;
+            max-height  : 180px;
+            margin-right: 20px;
+        }
+    }
+
+
+
+    .variation {
+        display       : flex;
+        flex-direction: column;
+
+        .var-item {
+            margin-right: 5px;
+        }
+
+        span {
+            height: 25px;
+        }
+    }
+    .qty{
+        margin-top: 20px;
+    }
+
+
+}
+
+.sum-price {
+    color      : #666;
+    font-size  : 18px;
+    display    : block;
+    line-height: 1;
+    white-space: nowrap;
+    font-weight: 800;
+    margin-top: 10px;
+}

@@ -1,0 +1,41 @@
+.address-container {
+    display        : flex;
+    justify-content: center;
+
+    .container {
+        width: 80%;
+    }
+}
+
+.ch-addresses-header {
+    font-size    : 40px;
+    border-bottom: 1px solid;
+    margin       : 20px 0;
+}
+
+.ch-addresses {
+
+    display  : flex;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+    border-bottom:  1px solid;
+
+    .addresses {
+        display       : flex;
+        flex-direction: column;
+        border        : 2px solid orange;
+        width         : fit-content;
+        padding       : 20px;
+        margin        : 20px 20px 20px 0;
+        max-width: 250px;
+        .street{
+            word-break: break-all;
+        }
+    }
+}
+
+.ch-btn-container{
+margin:   20px 0;
+display: flex;
+justify-content: space-between;
+}

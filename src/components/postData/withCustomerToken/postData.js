@@ -1,5 +1,5 @@
-const CustomerToken = "65optrawfpd1rbxf0f5j4i6dwzp7wjho";
-const postdata = (url, data) => {
+
+const postdata = (url, data ,CustomerToken) => {
     return fetch(url, {
       method: "POST",
       headers: {

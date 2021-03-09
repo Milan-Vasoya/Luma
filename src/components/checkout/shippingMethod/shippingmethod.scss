@@ -1,0 +1,24 @@
+.shipping-header{
+    font-size: 30px;
+    
+    margin: 24px 0;
+    border-bottom: 1px solid;
+}
+.sh-table{
+    width: 700px;
+    border-collapse: collapse;
+    tbody{
+        >:last-child{
+            border: none;
+        }
+    }
+    tr{
+        border-bottom: 1px solid grey;
+        height: 50px;
+        cursor:  pointer;
+
+        button{
+            margin: 25px 0 0 auto;
+        }
+    }
+}

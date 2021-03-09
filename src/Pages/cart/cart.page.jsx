@@ -36,7 +36,7 @@ const CartPage = () => {
         </div>
 
         <div className="cart">
-          <form>
+         
             <table className="cart-table">
               <thead className="table-header">
                 <tr>
@@ -59,7 +59,7 @@ const CartPage = () => {
                 <CartPageItem key={cartItem.item_id} cartItem={cartItem} />
               ))}
             </table>
-          </form>
+ 
         </div>
       </div>
     </div>
